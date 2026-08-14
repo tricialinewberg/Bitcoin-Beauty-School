@@ -51,11 +51,13 @@ Full design system and screens are available in Figma:
 A selection of the 18 screens designed for this project — from onboarding to the Belle AI chat, quizzes, and progress tracking.
 
 <p align="left">
-  <img src="design/screens/Onboarding_1.png" width="200" />
+  <img src="design/screens/Onboarding 1.png" width="200" />
+  <img src="design/screens/Onboarding 2.png" width="200" />
+  <img src="design/screens/Onboarding 3.png" width="200" />
   <img src="design/screens/Home.png" width="200" />
   <img src="design/screens/Belle.png" width="200" />
+  <img src="design/screens/Belle Chat.png" width="200" />
   <img src="design/screens/Quiz.png" width="200" />
-  <img src="design/screens/Journey.png" width="200" />
 </p>
 
 *See the [`/design`](./design) folder for the complete set.*
