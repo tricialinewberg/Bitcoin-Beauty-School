@@ -55,6 +55,7 @@ A selection of the 18 screens designed for this project — from onboarding to t
   <img src="design/screens/Onboarding 2.png" width="200" />
   <img src="design/screens/Onboarding 3.png" width="200" />
   <img src="design/screens/Home.png" width="200" />
+  <img src="design/screens/Side Menu.png" width="200" />
   <img src="design/screens/Belle.png" width="200" />
   <img src="design/screens/Belle Chat.png" width="200" />
   <img src="design/screens/Quiz.png" width="200" />
