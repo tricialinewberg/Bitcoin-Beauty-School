@@ -42,7 +42,7 @@ Full design system and screens are available in Figma:
 ### Brand
 
 <p align="left">
-  <img src="design/brand/bitcoin beauty school (3).png" width="200" alt="Bitcoin Beauty School logo" />
+  <img src="design/brand/LOGO.png" width="200" alt="Bitcoin Beauty School logo" />
   <img src="design/brand/Belle avatar.png" width="200" alt="Belle, the AI companion" />
 </p>
 
