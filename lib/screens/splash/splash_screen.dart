@@ -37,7 +37,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.softBabyPink,
+      // White (not Soft Baby Pink) so logo.png's own white background
+      // blends in seamlessly with no visible edge.
+      backgroundColor: AppColors.bloomWhite,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 64),

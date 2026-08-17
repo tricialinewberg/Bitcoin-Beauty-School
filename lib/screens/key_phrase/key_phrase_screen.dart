@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,6 +8,16 @@ import '../../widgets/app_button.dart';
 import '../../widgets/app_card.dart';
 import '../../widgets/detail_app_bar.dart';
 import '../../widgets/section_label.dart';
+
+/// Placeholder bank of full beauty-themed phrases. Real key-phrase
+/// generation and Nostr derivation land in a later session.
+const _mockPhraseBank = [
+  'My blush never goes out of style',
+  'Glow eternal, secret key',
+  'Red lipstick, hidden balance',
+  'Soft power, sharp focus',
+  'Velvet touch, iron grip',
+];
 
 /// UI-only for now — reveal/restore are mocked. Real Nostr key derivation
 /// and relay sync land in a later session.
@@ -17,7 +29,8 @@ class KeyPhraseScreen extends StatefulWidget {
 }
 
 class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
-  static const _mockPhrase = ['blush', 'velvet', 'satin', 'honey', 'petal', 'glow'];
+  late final _mockPhrase =
+      _mockPhraseBank[Random().nextInt(_mockPhraseBank.length)];
 
   final _restoreController = TextEditingController();
   bool _revealed = false;
@@ -29,7 +42,7 @@ class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
   }
 
   void _copyPhrase() {
-    Clipboard.setData(ClipboardData(text: _mockPhrase.join(' ')));
+    Clipboard.setData(ClipboardData(text: _mockPhrase));
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Key phrase copied')),
     );
@@ -71,21 +84,26 @@ class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            AppCard(
-              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
-              child: Column(
-                children: [
-                  _revealed ? _RevealedPhrase(words: _mockPhrase) : const _BlurredPlaceholder(),
-                  const SizedBox(height: 20),
-                  AppButton(
-                    label: _revealed ? 'Hide' : 'Reveal',
-                    icon: _revealed
-                        ? Icons.visibility_off_rounded
-                        : Icons.visibility_rounded,
-                    expand: false,
-                    onPressed: () => setState(() => _revealed = !_revealed),
-                  ),
-                ],
+            SizedBox(
+              width: double.infinity,
+              child: AppCard(
+                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
+                child: Column(
+                  children: [
+                    _revealed
+                        ? _RevealedPhrase(phrase: _mockPhrase)
+                        : const _BlurredPlaceholder(),
+                    const SizedBox(height: 20),
+                    AppButton(
+                      label: _revealed ? 'Hide' : 'Reveal',
+                      icon: _revealed
+                          ? Icons.visibility_off_rounded
+                          : Icons.visibility_rounded,
+                      expand: false,
+                      onPressed: () => setState(() => _revealed = !_revealed),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -186,23 +204,16 @@ class _BlurredPlaceholder extends StatelessWidget {
 }
 
 class _RevealedPhrase extends StatelessWidget {
-  const _RevealedPhrase({required this.words});
+  const _RevealedPhrase({required this.phrase});
 
-  final List<String> words;
+  final String phrase;
 
   @override
   Widget build(BuildContext context) {
-    final half = (words.length / 2).ceil();
-    final firstLine = words.take(half).join('  ·  ');
-    final secondLine = words.skip(half).join('  ·  ');
-    final style = Theme.of(context).textTheme.headlineSmall;
-
-    return Column(
-      children: [
-        Text(firstLine, style: style, textAlign: TextAlign.center),
-        const SizedBox(height: 8),
-        Text(secondLine, style: style, textAlign: TextAlign.center),
-      ],
+    return Text(
+      phrase,
+      style: Theme.of(context).textTheme.headlineSmall,
+      textAlign: TextAlign.center,
     );
   }
 }
