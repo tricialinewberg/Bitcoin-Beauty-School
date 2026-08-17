@@ -1,0 +1,334 @@
+{
+  "intermediate": [
+    {
+      "id": "int-01",
+      "question": "What is a UTXO?",
+      "options": [
+        { "id": "A", "text": "An Unspent Transaction Output — a discrete 'chunk' of bitcoin you own that hasn't been spent yet" },
+        { "id": "B", "text": "A type of Bitcoin wallet app" },
+        { "id": "C", "text": "A unit used only for measuring mining power" },
+        { "id": "D", "text": "A fee paid to the Bitcoin network" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-02",
+      "question": "When you spend bitcoin, what typically happens to the UTXO(s) used?",
+      "options": [
+        { "id": "A", "text": "They are split in half automatically" },
+        { "id": "B", "text": "They are consumed entirely and new UTXOs are created (including any 'change' sent back to you)" },
+        { "id": "C", "text": "They remain unchanged and reusable" },
+        { "id": "D", "text": "They are converted into a single account balance" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-03",
+      "question": "What is the mempool?",
+      "options": [
+        { "id": "A", "text": "A waiting area where unconfirmed transactions sit before being included in a block" },
+        { "id": "B", "text": "The total supply of bitcoin still to be mined" },
+        { "id": "C", "text": "A backup copy of the blockchain" },
+        { "id": "D", "text": "A wallet used by miners only" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-04",
+      "question": "Why might a transaction sit in the mempool for a long time without confirming?",
+      "options": [
+        { "id": "A", "text": "The network is offline" },
+        { "id": "B", "text": "The sender used a fee that's too low compared to current demand for block space" },
+        { "id": "C", "text": "The recipient hasn't accepted it yet" },
+        { "id": "D", "text": "Transactions always take the same fixed amount of time" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-05",
+      "question": "What drives Bitcoin's fee market?",
+      "options": [
+        { "id": "A", "text": "A fixed government-set rate" },
+        { "id": "B", "text": "Competition among users for limited block space — higher fees tend to get priority" },
+        { "id": "C", "text": "The total number of bitcoin a wallet holds" },
+        { "id": "D", "text": "The age of the wallet sending the transaction" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-06",
+      "question": "What is a multisig (multi-signature) wallet?",
+      "options": [
+        { "id": "A", "text": "A wallet that requires multiple private keys to authorize a transaction, instead of just one" },
+        { "id": "B", "text": "A wallet that can hold multiple cryptocurrencies at once" },
+        { "id": "C", "text": "A wallet with multiple public addresses for receiving only" },
+        { "id": "D", "text": "A wallet that automatically signs up for multiple exchanges" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-07",
+      "question": "A '2-of-3' multisig setup means:",
+      "options": [
+        { "id": "A", "text": "Any 2 of the 3 designated keys must sign to approve a transaction" },
+        { "id": "B", "text": "All 3 keys must always sign together" },
+        { "id": "C", "text": "The wallet is limited to 3 transactions total" },
+        { "id": "D", "text": "3 different people share one single key" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-08",
+      "question": "What is the Lightning Network?",
+      "options": [
+        { "id": "A", "text": "A separate cryptocurrency that replaces Bitcoin" },
+        { "id": "B", "text": "A 'layer 2' network built on top of Bitcoin that enables fast, low-fee payments" },
+        { "id": "C", "text": "A faster version of Bitcoin mining hardware" },
+        { "id": "D", "text": "A backup system for storing seed phrases" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-09",
+      "question": "Why was the Lightning Network created?",
+      "options": [
+        { "id": "A", "text": "To replace Bitcoin's blockchain entirely" },
+        { "id": "B", "text": "To enable faster and cheaper everyday payments without every transaction needing to go on the base blockchain" },
+        { "id": "C", "text": "To increase Bitcoin's total supply" },
+        { "id": "D", "text": "To eliminate the need for wallets" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-10",
+      "question": "In simple terms, what is a Lightning payment channel?",
+      "options": [
+        { "id": "A", "text": "A two-party agreement that lets participants send many instant payments back and forth off-chain, settling on the blockchain only when needed" },
+        { "id": "B", "text": "A physical cable connecting two mining rigs" },
+        { "id": "C", "text": "A subscription that unlocks lower blockchain fees" },
+        { "id": "D", "text": "A public chatroom for Bitcoin traders" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-11",
+      "question": "What's the key difference between a custodial and a non-custodial wallet, in terms of risk?",
+      "options": [
+        { "id": "A", "text": "There is no risk difference between them" },
+        { "id": "B", "text": "With a custodial wallet, you depend on a third party's solvency and security; with non-custodial, you bear full responsibility for your own keys" },
+        { "id": "C", "text": "Custodial wallets are always illegal" },
+        { "id": "D", "text": "Non-custodial wallets require a monthly fee to a company" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-12",
+      "question": "What is a hardware wallet?",
+      "options": [
+        { "id": "A", "text": "A physical device designed to store private keys offline, isolated from internet-connected devices" },
+        { "id": "B", "text": "A metal plate used to engrave your public address" },
+        { "id": "C", "text": "A mining rig used to earn new bitcoin" },
+        { "id": "D", "text": "A wallet app that only works on desktop computers" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-13",
+      "question": "What is a 'watch-only' wallet?",
+      "options": [
+        { "id": "A", "text": "A wallet that can view balances and transactions using public keys/addresses, but cannot spend funds since it holds no private keys" },
+        { "id": "B", "text": "A wallet used exclusively to monitor other people's transactions" },
+        { "id": "C", "text": "A wallet that locks automatically after 60 seconds" },
+        { "id": "D", "text": "A wallet that only works with Lightning payments" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-14",
+      "question": "What is the 'difficulty adjustment' in Bitcoin?",
+      "options": [
+        { "id": "A", "text": "A periodic change to how hard it is to mine a new block, keeping average block time around 10 minutes as total mining power changes" },
+        { "id": "B", "text": "A vote on whether to raise Bitcoin's price" },
+        { "id": "C", "text": "A change to the maximum supply of bitcoin" },
+        { "id": "D", "text": "A setting users adjust in their own wallet" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-15",
+      "question": "If more miners join the network and total computing power rises, what happens to mining difficulty?",
+      "options": [
+        { "id": "A", "text": "It decreases" },
+        { "id": "B", "text": "It stays exactly the same forever" },
+        { "id": "C", "text": "It increases, to keep block production time roughly constant" },
+        { "id": "D", "text": "Bitcoin's supply cap increases in response" }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": "int-16",
+      "question": "What does 'hash rate' refer to?",
+      "options": [
+        { "id": "A", "text": "The total number of Bitcoin wallets in existence" },
+        { "id": "B", "text": "The combined computational power being used to mine and secure the Bitcoin network" },
+        { "id": "C", "text": "The percentage of bitcoin currently held on exchanges" },
+        { "id": "D", "text": "The number of transactions per second" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-17",
+      "question": "What's the difference between a 'node' and a 'miner' in Bitcoin?",
+      "options": [
+        { "id": "A", "text": "They are two names for the exact same role" },
+        { "id": "B", "text": "A node validates and relays transactions/blocks according to the rules; a miner additionally competes to create new blocks. All miners run node software, but not all nodes mine" },
+        { "id": "C", "text": "A node only exists on exchanges; miners only exist in wallets" },
+        { "id": "D", "text": "A miner enforces rules, while a node only stores price data" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-18",
+      "question": "What does it mean to run a 'full node'?",
+      "options": [
+        { "id": "A", "text": "Downloading and independently verifying the entire Bitcoin blockchain and its rules" },
+        { "id": "B", "text": "Owning the maximum allowed amount of bitcoin" },
+        { "id": "C", "text": "Operating a mining farm with many machines" },
+        { "id": "D", "text": "Subscribing to a premium wallet service" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-19",
+      "question": "In general terms, what is a soft fork?",
+      "options": [
+        { "id": "A", "text": "A backward-compatible upgrade to Bitcoin's rules, where old software can still recognize new blocks as valid" },
+        { "id": "B", "text": "A permanent split that creates two separate cryptocurrencies" },
+        { "id": "C", "text": "A change that doubles the block size" },
+        { "id": "D", "text": "A reversal of a confirmed transaction" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-20",
+      "question": "In general terms, what is a hard fork?",
+      "options": [
+        { "id": "A", "text": "A minor bug fix that requires no coordination" },
+        { "id": "B", "text": "A rule change that is NOT backward-compatible, which can split the network into two separate chains if not everyone upgrades" },
+        { "id": "C", "text": "A change only miners are allowed to vote on" },
+        { "id": "D", "text": "A required annual software update" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-21",
+      "question": "Why do security experts recommend never entering your seed phrase into a website or app that requests it unexpectedly?",
+      "options": [
+        { "id": "A", "text": "It's a common phishing tactic to steal full access to your wallet" },
+        { "id": "B", "text": "Websites are legally required to store it for you" },
+        { "id": "C", "text": "It's needed to verify your email address" },
+        { "id": "D", "text": "It automatically converts your bitcoin to cash" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-22",
+      "question": "What is a common warning sign of a Bitcoin investment scam?",
+      "options": [
+        { "id": "A", "text": "A platform clearly disclosing risks and fees" },
+        { "id": "B", "text": "Guaranteed, risk-free returns or pressure to invest quickly" },
+        { "id": "C", "text": "A wallet that lets you view your own transaction history" },
+        { "id": "D", "text": "A hardware wallet requiring a PIN to unlock" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "int-23",
+      "question": "What is a 'dust' transaction generally understood to be?",
+      "options": [
+        { "id": "A", "text": "A transaction sending an amount so small it may cost more in fees than it's worth" },
+        { "id": "B", "text": "A transaction that fails validation" },
+        { "id": "C", "text": "A transaction sent to a mining pool" },
+        { "id": "D", "text": "A transaction between two exchanges" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-24",
+      "question": "What is a mining pool?",
+      "options": [
+        { "id": "A", "text": "A group of miners who combine computing power and share the block rewards proportionally" },
+        { "id": "B", "text": "A single company that owns all Bitcoin mining rights" },
+        { "id": "C", "text": "A wallet designed only for miners" },
+        { "id": "D", "text": "A fund that buys bitcoin on behalf of investors" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-25",
+      "question": "Why might someone choose a non-custodial wallet despite the added personal responsibility?",
+      "options": [
+        { "id": "A", "text": "To avoid counterparty risk — no third party can freeze, lose, or misuse their funds" },
+        { "id": "B", "text": "Because it's required by law in most countries" },
+        { "id": "C", "text": "Because it eliminates the need for a seed phrase" },
+        { "id": "D", "text": "Because it guarantees faster transaction confirmations" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-26",
+      "question": "What does 'block space' refer to?",
+      "options": [
+        { "id": "A", "text": "The limited amount of data capacity available in each block for transactions" },
+        { "id": "B", "text": "The physical storage size of a hardware wallet" },
+        { "id": "C", "text": "The number of confirmed blocks in Bitcoin's history" },
+        { "id": "D", "text": "The area on an exchange reserved for large trades" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-27",
+      "question": "What is 'fee bumping' (e.g., via Replace-By-Fee)?",
+      "options": [
+        { "id": "A", "text": "Increasing the fee on an unconfirmed transaction to encourage faster confirmation" },
+        { "id": "B", "text": "A penalty applied for sending too many transactions" },
+        { "id": "C", "text": "A discount applied automatically after your first transaction" },
+        { "id": "D", "text": "A fee charged only when withdrawing from an exchange" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-28",
+      "question": "What is 'address reuse' and why is it generally discouraged?",
+      "options": [
+        { "id": "A", "text": "Using the same address repeatedly, which can make it easier for outside observers to link your transactions together" },
+        { "id": "B", "text": "Sending bitcoin to an address that has already expired" },
+        { "id": "C", "text": "A technical error that prevents a transaction from processing" },
+        { "id": "D", "text": "A required step to verify wallet ownership" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-29",
+      "question": "In the context of Lightning, what is 'routing'?",
+      "options": [
+        { "id": "A", "text": "Sending a payment across a path of connected channels between multiple parties, without needing a direct channel to the final recipient" },
+        { "id": "B", "text": "Choosing which mining pool processes your transaction" },
+        { "id": "C", "text": "Selecting which exchange handles your trade" },
+        { "id": "D", "text": "Splitting a payment across multiple blockchains" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "int-30",
+      "question": "What is 'self-custody'?",
+      "options": [
+        { "id": "A", "text": "Holding your own private keys and taking direct responsibility for securing your bitcoin, rather than relying on a third party" },
+        { "id": "B", "text": "A legal service that manages your bitcoin for you" },
+        { "id": "C", "text": "A feature exclusive to mining pools" },
+        { "id": "D", "text": "A backup wallet provided free by exchanges" }
+      ],
+      "correct": "A"
+    }
+  ]
+}

@@ -1,0 +1,334 @@
+{
+  "advanced": [
+    {
+      "id": "adv-01",
+      "question": "At a conceptual level, what did the Taproot upgrade primarily enable?",
+      "options": [
+        { "id": "A", "text": "Complex spending conditions (like multisig) to look identical to simple single-signature spends on-chain, improving privacy and efficiency" },
+        { "id": "B", "text": "An increase in Bitcoin's total supply cap" },
+        { "id": "C", "text": "The removal of transaction fees entirely" },
+        { "id": "D", "text": "Instant, zero-confirmation finality for all transactions" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-02",
+      "question": "What advantage do Schnorr signatures offer over Bitcoin's earlier ECDSA signatures?",
+      "options": [
+        { "id": "A", "text": "They allow multiple signatures to be mathematically combined into a single, more compact signature (key aggregation)" },
+        { "id": "B", "text": "They eliminate the need for private keys altogether" },
+        { "id": "C", "text": "They make transactions reversible" },
+        { "id": "D", "text": "They allow unlimited free transactions" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-03",
+      "question": "What does P2PKH stand for, and what does it represent?",
+      "options": [
+        { "id": "A", "text": "Pay-to-Public-Key-Hash — a classic Bitcoin script type where funds are locked to the hash of a public key" },
+        { "id": "B", "text": "Peer-to-Peer Key Hosting — a way to store keys across multiple devices" },
+        { "id": "C", "text": "Proof-to-Private-Key-Holder — a method for verifying wallet ownership" },
+        { "id": "D", "text": "Payment-to-Pool-Key-Holder — a mining reward distribution method" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-04",
+      "question": "What is the main advantage of P2WPKH (native SegWit) addresses over legacy P2PKH addresses?",
+      "options": [
+        { "id": "A", "text": "They restructure transaction data to fix transaction malleability and generally reduce fees" },
+        { "id": "B", "text": "They allow bitcoin to be created without mining" },
+        { "id": "C", "text": "They remove the need for a wallet entirely" },
+        { "id": "D", "text": "They guarantee instant confirmation" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-05",
+      "question": "What does a P2TR (Pay-to-Taproot) address type enable, at a conceptual level?",
+      "options": [
+        { "id": "A", "text": "Spending conditions that can use either a simple key-path spend or a more complex script-path spend, while looking the same on-chain in the common case" },
+        { "id": "B", "text": "Transactions that never require any fee" },
+        { "id": "C", "text": "Wallets that can bypass the mempool entirely" },
+        { "id": "D", "text": "A way to mine blocks without proof-of-work" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-06",
+      "question": "What is a BIP?",
+      "options": [
+        { "id": "A", "text": "A Bitcoin Improvement Proposal — a design document proposing new features, standards, or processes for Bitcoin" },
+        { "id": "B", "text": "A Bitcoin Insurance Policy offered by exchanges" },
+        { "id": "C", "text": "A type of hardware wallet" },
+        { "id": "D", "text": "A mandatory tax form for bitcoin transactions" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-07",
+      "question": "What does BIP-39 define?",
+      "options": [
+        { "id": "A", "text": "A standard for generating mnemonic seed phrases used to back up and restore wallets" },
+        { "id": "B", "text": "The maximum block size allowed on the network" },
+        { "id": "C", "text": "The rules for Lightning Network channel opening" },
+        { "id": "D", "text": "The formula used for the difficulty adjustment" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-08",
+      "question": "Which of these is an accurate, high-level description of what BIP-32 introduced?",
+      "options": [
+        { "id": "A", "text": "Hierarchical Deterministic (HD) wallets, which can generate a whole tree of key pairs from a single seed" },
+        { "id": "B", "text": "The Lightning Network's payment channel structure" },
+        { "id": "C", "text": "The rule that caps Bitcoin's supply at 21 million" },
+        { "id": "D", "text": "Multisignature transaction scripts" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-09",
+      "question": "In Lightning Network routing, what is a common purpose of onion routing (similar in concept to Tor)?",
+      "options": [
+        { "id": "A", "text": "To keep each hop in a multi-hop payment path from knowing the full route or the ultimate sender and receiver" },
+        { "id": "B", "text": "To increase the mining reward for a block" },
+        { "id": "C", "text": "To permanently store transaction history on-chain" },
+        { "id": "D", "text": "To eliminate the need for payment channels" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-10",
+      "question": "What is a Lightning Network 'hub' or highly-connected node generally used for?",
+      "options": [
+        { "id": "A", "text": "Facilitating routing between many other nodes that aren't directly connected to each other" },
+        { "id": "B", "text": "Mining new blocks faster than regular nodes" },
+        { "id": "C", "text": "Setting Bitcoin's overall supply schedule" },
+        { "id": "D", "text": "Storing the master copy of the blockchain for the whole network" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-11",
+      "question": "What risk is inherent to being a routing node on the Lightning Network?",
+      "options": [
+        { "id": "A", "text": "Needing to lock up liquidity in channels, which can become imbalanced or illiquid over time" },
+        { "id": "B", "text": "Being required to mine blocks to keep the channel open" },
+        { "id": "C", "text": "Losing ownership of the Bitcoin blockchain's full history" },
+        { "id": "D", "text": "Automatically forfeiting funds after every payment" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-12",
+      "question": "What is CoinJoin, at a conceptual level?",
+      "options": [
+        { "id": "A", "text": "A privacy technique where multiple users combine their transactions into one, making it harder for outside observers to trace which input paid which output" },
+        { "id": "B", "text": "A method for merging two different cryptocurrencies into one" },
+        { "id": "C", "text": "A type of mining pool" },
+        { "id": "D", "text": "A required step before opening a Lightning channel" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-13",
+      "question": "Why is on-chain privacy considered limited on Bitcoin by default, despite addresses not directly containing personal names?",
+      "options": [
+        { "id": "A", "text": "The blockchain is fully public and transaction patterns can often be analyzed and linked to real-world identities through chain analysis" },
+        { "id": "B", "text": "All addresses automatically display the owner's legal name" },
+        { "id": "C", "text": "Every wallet is required to register with a central authority" },
+        { "id": "D", "text": "Bitcoin transactions are encrypted and hidden from the public" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-14",
+      "question": "Historically, what was the core disagreement at the heart of Bitcoin's 'block size debate' (mid-2010s)?",
+      "options": [
+        { "id": "A", "text": "Whether to increase the base block size to allow more transactions on-chain, versus prioritizing decentralization and scaling via other means like Lightning" },
+        { "id": "B", "text": "Whether Bitcoin should switch to proof-of-stake" },
+        { "id": "C", "text": "Whether to remove the 21 million supply cap" },
+        { "id": "D", "text": "Whether mining should be banned entirely" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-15",
+      "question": "What was Bitcoin Cash, in relation to this debate?",
+      "options": [
+        { "id": "A", "text": "A hard fork of Bitcoin created by proponents of larger blocks, resulting in a separate cryptocurrency" },
+        { "id": "B", "text": "An official Bitcoin software update adopted by the entire network" },
+        { "id": "C", "text": "A Lightning Network implementation" },
+        { "id": "D", "text": "A wallet brand owned by Bitcoin's core developers" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-16",
+      "question": "What consensus mechanism does Bitcoin use to agree on the valid state of the blockchain?",
+      "options": [
+        { "id": "A", "text": "Proof-of-Work, where miners compete to solve a computational puzzle to add the next block" },
+        { "id": "B", "text": "Proof-of-Stake, where validators are chosen based on how much bitcoin they hold" },
+        { "id": "C", "text": "A vote among registered users" },
+        { "id": "D", "text": "A decision made by a rotating panel of developers" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-17",
+      "question": "In Bitcoin's consensus rules, what generally determines which chain is considered valid when there's a temporary fork (e.g., two miners find a block near-simultaneously)?",
+      "options": [
+        { "id": "A", "text": "Nodes follow the chain with the greatest cumulative proof-of-work" },
+        { "id": "B", "text": "The chain chosen by a majority vote of exchange operators" },
+        { "id": "C", "text": "The chain that was announced on social media first" },
+        { "id": "D", "text": "Whichever chain a government regulator approves" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-18",
+      "question": "What is a '51% attack'?",
+      "options": [
+        { "id": "A", "text": "A scenario where an entity controlling a majority of network hash rate could potentially double-spend coins or block certain transactions" },
+        { "id": "B", "text": "A phishing scam targeting 51% of wallet users" },
+        { "id": "C", "text": "A rule that requires 51% of nodes to approve a new address format" },
+        { "id": "D", "text": "A bug that affects 51% of all transactions" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-19",
+      "question": "What does a mining pool operator typically control that individual pool participants do not?",
+      "options": [
+        { "id": "A", "text": "The construction of the block template, including which transactions are included (in traditional pool setups)" },
+        { "id": "B", "text": "The private keys of every participant's wallet" },
+        { "id": "C", "text": "Bitcoin's overall supply cap" },
+        { "id": "D", "text": "The seed phrases of all pool members" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-20",
+      "question": "What is 'Stratum V2' generally understood to improve, relative to earlier mining pool protocols?",
+      "options": [
+        { "id": "A", "text": "It allows individual miners, rather than only the pool operator, to select which transactions go into a block template, improving decentralization" },
+        { "id": "B", "text": "It doubles Bitcoin's block reward" },
+        { "id": "C", "text": "It eliminates the need for proof-of-work" },
+        { "id": "D", "text": "It removes transaction fees for pool members" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-21",
+      "question": "What is a sidechain, conceptually?",
+      "options": [
+        { "id": "A", "text": "A separate blockchain that is connected to Bitcoin, often via a two-way peg, allowing assets to move between the two under different rules" },
+        { "id": "B", "text": "A backup copy of the Bitcoin blockchain stored by exchanges" },
+        { "id": "C", "text": "A second, independent seed phrase for extra security" },
+        { "id": "D", "text": "A subset of Lightning Network channels" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-22",
+      "question": "What is a commonly cited trade-off of using a federated sidechain (where a group of trusted entities manages the peg)?",
+      "options": [
+        { "id": "A", "text": "Users must trust the federation's honesty and security, introducing a different trust model than Bitcoin's base layer" },
+        { "id": "B", "text": "It permanently destroys the pegged bitcoin" },
+        { "id": "C", "text": "It removes the possibility of ever moving funds back to the main chain" },
+        { "id": "D", "text": "It automatically doubles transaction fees on the main chain" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-23",
+      "question": "In Bitcoin development discussions, what is a 'covenant' generally understood to be?",
+      "options": [
+        { "id": "A", "text": "A proposed type of spending restriction that constrains how coins can be spent in the future, beyond a simple signature check" },
+        { "id": "B", "text": "A legal contract required to open a Lightning channel" },
+        { "id": "C", "text": "A rule enforced by exchanges on withdrawals" },
+        { "id": "D", "text": "An agreement among miners to fix fees" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-24",
+      "question": "Why are covenants a debated topic in the Bitcoin community?",
+      "options": [
+        { "id": "A", "text": "They could enable powerful new use cases, but critics raise concerns about added complexity and potential unintended restrictions on fungibility or user freedom" },
+        { "id": "B", "text": "They are universally agreed to be harmless and uncontroversial" },
+        { "id": "C", "text": "They would immediately increase Bitcoin's supply cap" },
+        { "id": "D", "text": "They are already fully implemented and non-controversial in Bitcoin's base layer" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-25",
+      "question": "What is the key difference between a full node and an SPV (Simplified Payment Verification) client?",
+      "options": [
+        { "id": "A", "text": "A full node independently validates all rules and downloads the entire blockchain; an SPV client trusts other nodes for most data and only verifies block headers plus merkle proofs" },
+        { "id": "B", "text": "SPV clients store more data than full nodes" },
+        { "id": "C", "text": "Full nodes cannot send or receive bitcoin, only SPV clients can" },
+        { "id": "D", "text": "There is no meaningful difference between them" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-26",
+      "question": "What is a key privacy and security trade-off of using an SPV wallet compared to running a full node?",
+      "options": [
+        { "id": "A", "text": "SPV wallets typically rely on other network participants for transaction data, which can leak some information about which addresses interest the user" },
+        { "id": "B", "text": "SPV wallets require significantly more storage than full nodes" },
+        { "id": "C", "text": "SPV wallets cannot ever send transactions" },
+        { "id": "D", "text": "Full nodes are inherently less secure than SPV wallets" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-27",
+      "question": "What does 'fungibility' mean in the context of Bitcoin?",
+      "options": [
+        { "id": "A", "text": "The idea that each unit of bitcoin should be interchangeable with any other, without one being treated as 'tainted' or less valuable due to its history" },
+        { "id": "B", "text": "The ability to convert bitcoin into any other currency instantly" },
+        { "id": "C", "text": "The maximum number of transactions per block" },
+        { "id": "D", "text": "A measure of how quickly a transaction confirms" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-28",
+      "question": "Why can blockchain analysis potentially threaten Bitcoin's fungibility in practice?",
+      "options": [
+        { "id": "A", "text": "Coins linked to certain past transactions (e.g., theft or illicit activity) could be treated differently by some services, even though technically each bitcoin is identical" },
+        { "id": "B", "text": "It changes the actual code that defines each bitcoin unit" },
+        { "id": "C", "text": "It automatically destroys coins with a flagged history" },
+        { "id": "D", "text": "It has no real-world effect on how coins are treated" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-29",
+      "question": "What is the general purpose of a 'watchtower' service in the Lightning Network?",
+      "options": [
+        { "id": "A", "text": "To monitor the blockchain on a user's behalf and respond if a channel counterparty tries to broadcast an outdated, fraudulent channel state" },
+        { "id": "B", "text": "To mine new blocks faster on behalf of the user" },
+        { "id": "C", "text": "To set the exchange rate for bitcoin" },
+        { "id": "D", "text": "To generate new seed phrases automatically" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "adv-30",
+      "question": "What does 'channel jamming' refer to in the context of Lightning Network attacks?",
+      "options": [
+        { "id": "A", "text": "Deliberately tying up a routing node's liquidity with pending payments that are never settled, disrupting its ability to route other transactions" },
+        { "id": "B", "text": "Physically damaging mining hardware" },
+        { "id": "C", "text": "Flooding the blockchain with duplicate blocks" },
+        { "id": "D", "text": "Locking a user out of their own wallet permanently" }
+      ],
+      "correct": "A"
+    }
+  ]
+}

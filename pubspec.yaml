@@ -80,6 +80,7 @@ flutter:
   # https://flutter.dev/to/resolution-aware-images
   assets:
     - assets/images/
+    - content/quiz/
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package

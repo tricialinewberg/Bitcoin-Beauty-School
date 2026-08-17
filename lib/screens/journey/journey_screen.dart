@@ -9,7 +9,7 @@ import '../belle/belle_screen.dart';
 import '../home/home_screen.dart';
 import '../home/widgets/app_bottom_nav_bar.dart';
 import '../menu/side_menu.dart';
-import '../quiz/quiz_screen.dart';
+import '../quiz/quiz_categories_screen.dart';
 import 'widgets/badge_tile.dart';
 
 class _BadgeData {
@@ -87,7 +87,7 @@ class JourneyScreen extends StatelessWidget {
       case 2:
         Navigator.of(
           context,
-        ).push(MaterialPageRoute(builder: (_) => const QuizScreen()));
+        ).push(MaterialPageRoute(builder: (_) => const QuizCategoriesScreen()));
       case 3:
         return;
     }

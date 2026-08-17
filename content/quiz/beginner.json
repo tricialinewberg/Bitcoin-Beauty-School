@@ -1,0 +1,334 @@
+{
+  "beginner": [
+    {
+      "id": "beg-01",
+      "question": "What is a sats?",
+      "options": [
+        { "id": "A", "text": "The smallest unit of Bitcoin — like a single drop of your favorite serum, tiny but part of the whole bottle" },
+        { "id": "B", "text": "A type of Bitcoin wallet" },
+        { "id": "C", "text": "A Bitcoin mining company" },
+        { "id": "D", "text": "A Bitcoin exchange platform" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-02",
+      "question": "Who is Satoshi Nakamoto?",
+      "options": [
+        { "id": "A", "text": "The pseudonymous creator of Bitcoin" },
+        { "id": "B", "text": "The CEO of a major exchange" },
+        { "id": "C", "text": "A famous crypto influencer" },
+        { "id": "D", "text": "The name of the first Bitcoin ATM" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-03",
+      "question": "What's the difference between a hot wallet and a cold wallet?",
+      "options": [
+        { "id": "A", "text": "A hot wallet is connected to the internet; a cold wallet is offline — like your everyday makeup bag vs. your backup stash locked away" },
+        { "id": "B", "text": "A hot wallet is for summer, a cold wallet is for winter" },
+        { "id": "C", "text": "They're the same thing, just different names" },
+        { "id": "D", "text": "A cold wallet loses value over time" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-04",
+      "question": "What is the maximum supply of Bitcoin that will ever exist?",
+      "options": [
+        { "id": "A", "text": "Unlimited" },
+        { "id": "B", "text": "21 million" },
+        { "id": "C", "text": "100 million" },
+        { "id": "D", "text": "1 billion" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-05",
+      "question": "What does it mean to \"mine\" Bitcoin?",
+      "options": [
+        { "id": "A", "text": "Digging for physical coins underground" },
+        { "id": "B", "text": "Using computer power to verify transactions and secure the network, earning new coins as a reward" },
+        { "id": "C", "text": "Buying Bitcoin at a discount" },
+        { "id": "D", "text": "Creating a new cryptocurrency" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-06",
+      "question": "In simple terms, what is Bitcoin?",
+      "options": [
+        { "id": "A", "text": "A company that sells digital products" },
+        { "id": "B", "text": "A decentralized digital currency that isn't controlled by any bank or government" },
+        { "id": "C", "text": "A type of credit card" },
+        { "id": "D", "text": "An app for online shopping" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-07",
+      "question": "What is the blockchain?",
+      "options": [
+        { "id": "A", "text": "A single company's private database" },
+        { "id": "B", "text": "A shared, public record of every Bitcoin transaction ever made — like a see-through diary everyone can check, but no one can edit" },
+        { "id": "C", "text": "A type of Bitcoin wallet" },
+        { "id": "D", "text": "A password used to access your Bitcoin" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-08",
+      "question": "Why is Bitcoin called \"decentralized\"?",
+      "options": [
+        { "id": "A", "text": "It's stored in one central bank" },
+        { "id": "B", "text": "No single person, company, or government controls it — it runs on thousands of computers worldwide" },
+        { "id": "C", "text": "It only works in certain countries" },
+        { "id": "D", "text": "It's controlled by its creator" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-09",
+      "question": "What happens when a Bitcoin transaction gets \"confirmed\"?",
+      "options": [
+        { "id": "A", "text": "It's permanently and securely recorded on the blockchain" },
+        { "id": "B", "text": "It gets deleted from your wallet" },
+        { "id": "C", "text": "It becomes reversible" },
+        { "id": "D", "text": "It's sent for approval to a bank" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-10",
+      "question": "What's the main difference between keeping Bitcoin on an exchange vs. in your own wallet?",
+      "options": [
+        { "id": "A", "text": "There's no real difference" },
+        { "id": "B", "text": "On an exchange, the company holds your coins for you; in your own wallet, only you have full control — \"not your keys, not your coins\"" },
+        { "id": "C", "text": "Exchanges are always safer" },
+        { "id": "D", "text": "Your own wallet requires a bank account" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-11",
+      "question": "What is a Bitcoin wallet address?",
+      "options": [
+        { "id": "A", "text": "A public identifier you can share so others can send you bitcoin — like a mailing address for your inbox" },
+        { "id": "B", "text": "The password to unlock your wallet" },
+        { "id": "C", "text": "A secret phrase used to recover your wallet" },
+        { "id": "D", "text": "The amount of bitcoin you own" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-12",
+      "question": "What's the difference between a public key and a private key in a Bitcoin wallet?",
+      "options": [
+        { "id": "A", "text": "A public key can be shared to receive funds; a private key must stay secret because it lets you spend them — think of it like your salon's public phone number vs. the code to your cash register" },
+        { "id": "B", "text": "They're the same thing with different names" },
+        { "id": "C", "text": "The public key is used to buy bitcoin; the private key is used to sell it" },
+        { "id": "D", "text": "The private key is shown to everyone; the public key is kept secret" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-13",
+      "question": "What is a seed phrase?",
+      "options": [
+        { "id": "A", "text": "A list of random words (usually 12 or 24) that can restore access to your entire wallet" },
+        { "id": "B", "text": "A short PIN code used to unlock your phone" },
+        { "id": "C", "text": "A list of exchanges you've used" },
+        { "id": "D", "text": "A code you enter to make a transaction go faster" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-14",
+      "question": "Why is it important to keep your seed phrase private and safe?",
+      "options": [
+        { "id": "A", "text": "It's only needed if you forget your email" },
+        { "id": "B", "text": "Anyone who has it can access and take all the funds in your wallet" },
+        { "id": "C", "text": "It's required to sign up for an exchange" },
+        { "id": "D", "text": "It expires after 30 days" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-15",
+      "question": "Why do Bitcoin transactions usually include a fee?",
+      "options": [
+        { "id": "A", "text": "Fees are a tax collected by the government" },
+        { "id": "B", "text": "Fees cover shipping costs for the digital currency" },
+        { "id": "C", "text": "Fees are a subscription cost charged by wallet apps" },
+        { "id": "D", "text": "Fees reward miners for including and confirming your transaction on the blockchain" }
+      ],
+      "correct": "D"
+    },
+    {
+      "id": "beg-16",
+      "question": "What is a 'block' in Bitcoin?",
+      "options": [
+        { "id": "A", "text": "A group of confirmed transactions bundled together and added to the blockchain" },
+        { "id": "B", "text": "A single Bitcoin coin" },
+        { "id": "C", "text": "A type of wallet" },
+        { "id": "D", "text": "A rule that blocks certain transactions" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-17",
+      "question": "What is a 'halving' in Bitcoin?",
+      "options": [
+        { "id": "A", "text": "An event where the reward miners receive for creating new blocks is cut in half" },
+        { "id": "B", "text": "An event where all bitcoin in circulation is cut in half" },
+        { "id": "C", "text": "A feature that halves transaction fees" },
+        { "id": "D", "text": "A yearly event where Bitcoin's price is reset" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-18",
+      "question": "Bitcoin's value mainly comes from...",
+      "options": [
+        { "id": "A", "text": "A government guarantee that backs its price" },
+        { "id": "B", "text": "Physical gold reserves held by a central bank" },
+        { "id": "C", "text": "People's collective trust in its scarcity, security, and usefulness — much like a limited-edition item holds value through demand and scarcity" },
+        { "id": "D", "text": "A fixed price set by its creator" }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": "beg-19",
+      "question": "What's the difference between 'Bitcoin' (capital B) and 'bitcoin' (lowercase b)?",
+      "options": [
+        { "id": "A", "text": "There is no real difference, it's just a spelling preference" },
+        { "id": "B", "text": "\"Bitcoin\" refers to the network/protocol, while \"bitcoin\" refers to the currency unit itself" },
+        { "id": "C", "text": "\"Bitcoin\" is the old name and \"bitcoin\" is the new one" },
+        { "id": "D", "text": "\"Bitcoin\" refers to mining, \"bitcoin\" refers to wallets" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-20",
+      "question": "What is a cryptocurrency exchange?",
+      "options": [
+        { "id": "A", "text": "A physical store that sells jewelry" },
+        { "id": "B", "text": "An online platform where people can buy, sell, or trade bitcoin for other currencies" },
+        { "id": "C", "text": "A type of wallet used only for long-term storage" },
+        { "id": "D", "text": "A government agency that regulates Bitcoin" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-21",
+      "question": "What is a 'custodial' wallet?",
+      "options": [
+        { "id": "A", "text": "A wallet where a third party (like an exchange) holds your private keys on your behalf" },
+        { "id": "B", "text": "A wallet that requires two people to approve every transaction" },
+        { "id": "C", "text": "A wallet that can only send bitcoin, never receive it" },
+        { "id": "D", "text": "A wallet used exclusively by miners" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-22",
+      "question": "In a 'non-custodial' wallet, who controls the private keys?",
+      "options": [
+        { "id": "A", "text": "The exchange where you bought your bitcoin" },
+        { "id": "B", "text": "A government regulator" },
+        { "id": "C", "text": "You, the wallet owner" },
+        { "id": "D", "text": "The Bitcoin network's miners" }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": "beg-23",
+      "question": "Why should you always double-check the recipient address before sending bitcoin?",
+      "options": [
+        { "id": "A", "text": "Bitcoin transactions typically cannot be reversed once confirmed" },
+        { "id": "B", "text": "The network automatically corrects mistakes" },
+        { "id": "C", "text": "Wrong addresses just bounce the funds back automatically" },
+        { "id": "D", "text": "Wallets always ask the recipient for a second approval first" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-24",
+      "question": "Who checks that a Bitcoin transaction follows the rules before it's added to the blockchain?",
+      "options": [
+        { "id": "A", "text": "A single central bank" },
+        { "id": "B", "text": "Computers (nodes) around the world running Bitcoin's software" },
+        { "id": "C", "text": "The person sending the transaction" },
+        { "id": "D", "text": "A customer service team" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-25",
+      "question": "At its most basic, what does a Bitcoin transaction do?",
+      "options": [
+        { "id": "A", "text": "Transfers value from one wallet address to another, recorded on the blockchain" },
+        { "id": "B", "text": "Creates a brand new coin every time" },
+        { "id": "C", "text": "Deletes bitcoin from circulation" },
+        { "id": "D", "text": "Converts bitcoin into a bank deposit" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-26",
+      "question": "Unlike traditional banks, when does the Bitcoin network process transactions?",
+      "options": [
+        { "id": "A", "text": "Only during business hours" },
+        { "id": "B", "text": "Only on weekdays" },
+        { "id": "C", "text": "24 hours a day, 7 days a week, including holidays" },
+        { "id": "D", "text": "Only once a month" }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": "beg-27",
+      "question": "What does it mean that Bitcoin is 'permissionless'?",
+      "options": [
+        { "id": "A", "text": "Anyone can use it without needing approval from a bank or authority" },
+        { "id": "B", "text": "It requires a license to use" },
+        { "id": "C", "text": "Only approved companies can send transactions" },
+        { "id": "D", "text": "You need government ID to receive bitcoin" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-28",
+      "question": "What does a Bitcoin wallet actually store?",
+      "options": [
+        { "id": "A", "text": "Physical bitcoin coins" },
+        { "id": "B", "text": "The keys that prove your ownership and let you access your bitcoin on the blockchain" },
+        { "id": "C", "text": "A full copy of the entire blockchain at all times" },
+        { "id": "D", "text": "Your bank account information" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": "beg-29",
+      "question": "What problem does Bitcoin's confirmation process help prevent?",
+      "options": [
+        { "id": "A", "text": "Someone spending the same bitcoin twice" },
+        { "id": "B", "text": "Wallets running out of storage space" },
+        { "id": "C", "text": "Miners charging different fees" },
+        { "id": "D", "text": "Exchanges going offline" }
+      ],
+      "correct": "A"
+    },
+    {
+      "id": "beg-30",
+      "question": "Unlike government-issued money, why can't more bitcoin be created on demand?",
+      "options": [
+        { "id": "A", "text": "It's illegal to create more bitcoin" },
+        { "id": "B", "text": "Bitcoin's supply schedule is fixed by its code and enforced by the network, not by a central decision-maker" },
+        { "id": "C", "text": "There's a global vote each year to decide" },
+        { "id": "D", "text": "Only the original creator can create new bitcoin" }
+      ],
+      "correct": "B"
+    }
+  ]
+}

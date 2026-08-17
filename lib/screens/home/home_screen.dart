@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/mock_progress.dart';
+import '../../data/quiz_repository.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_card.dart';
@@ -10,7 +11,8 @@ import '../../widgets/streak_day_row.dart';
 import '../belle/belle_screen.dart';
 import '../journey/journey_screen.dart';
 import '../menu/side_menu.dart';
-import '../quiz/quiz_screen.dart';
+import '../quiz/quiz_categories_screen.dart';
+import '../quiz/quiz_landing_screen.dart';
 import 'widgets/app_bottom_nav_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,9 +27,9 @@ class HomeScreen extends StatelessWidget {
           MaterialPageRoute(builder: (_) => const BelleScreen()),
         );
       case 2:
-        Navigator.of(
-          context,
-        ).push(MaterialPageRoute(builder: (_) => const QuizScreen()));
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const QuizCategoriesScreen()),
+        );
       case 3:
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const JourneyScreen()),
@@ -80,7 +82,7 @@ class HomeScreen extends StatelessWidget {
             _QuickPracticeRow(
               onSelect: (difficulty) => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => QuizScreen(difficulty: difficulty),
+                  builder: (_) => QuizLandingScreen(difficulty: difficulty),
                 ),
               ),
             ),
@@ -287,22 +289,20 @@ class _TipCard extends StatelessWidget {
 class _QuickPracticeRow extends StatelessWidget {
   const _QuickPracticeRow({required this.onSelect});
 
-  final ValueChanged<String> onSelect;
-
-  static const _difficulties = ['Beginner', 'Intermediate', 'Advanced'];
+  final ValueChanged<QuizDifficulty> onSelect;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        for (var i = 0; i < _difficulties.length; i++) ...[
+        for (var i = 0; i < QuizDifficulty.values.length; i++) ...[
           if (i != 0) const SizedBox(width: 10),
           Expanded(
             child: AppButton(
-              label: _difficulties[i],
+              label: QuizDifficulty.values[i].label,
               variant: AppButtonVariant.secondary,
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 14),
-              onPressed: () => onSelect(_difficulties[i]),
+              onPressed: () => onSelect(QuizDifficulty.values[i]),
             ),
           ),
         ],
