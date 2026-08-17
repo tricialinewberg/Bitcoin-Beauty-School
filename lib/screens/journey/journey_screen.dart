@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../data/mock_progress.dart';
+import '../../data/progress_repository.dart';
+import '../../data/user_progress.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/app_card.dart';
 import '../../widgets/glow_progress_bar.dart';
@@ -71,8 +72,26 @@ const _badges = [
   _BadgeData(icon: Icons.favorite_rounded, label: "Belle's Best Friend"),
 ];
 
-class JourneyScreen extends StatelessWidget {
+class JourneyScreen extends StatefulWidget {
   const JourneyScreen({super.key});
+
+  @override
+  State<JourneyScreen> createState() => _JourneyScreenState();
+}
+
+class _JourneyScreenState extends State<JourneyScreen> {
+  UserProgress? _progress;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProgress();
+  }
+
+  Future<void> _loadProgress() async {
+    final progress = await ProgressRepository.instance.load();
+    if (mounted) setState(() => _progress = progress);
+  }
 
   void _onTabTap(BuildContext context, int index) {
     switch (index) {
@@ -96,7 +115,8 @@ class JourneyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final unlockedCount = MockProgress.unlockedBadgeCount;
+    final progress = _progress;
+    final unlockedCount = progress?.unlockedBadgeCount ?? 0;
 
     return Scaffold(
       backgroundColor: AppColors.softBabyPink,
@@ -106,79 +126,81 @@ class JourneyScreen extends StatelessWidget {
         elevation: 0,
         actionsIconTheme: const IconThemeData(color: AppColors.glamPink),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Your Journey', style: textTheme.headlineLarge),
-            const SizedBox(height: 4),
-            Text(
-              "Look how far you've glowed.",
-              style: textTheme.bodyMedium?.copyWith(
-                color: AppColors.mutedMauve,
+      body: progress == null
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Your Journey', style: textTheme.headlineLarge),
+                  const SizedBox(height: 4),
+                  Text(
+                    "Look how far you've glowed.",
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: AppColors.mutedMauve,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  _LevelCard(progress: progress),
+                  const SizedBox(height: 20),
+                  _StreakCard(progress: progress),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _StatCard(
+                          value: '${progress.quizzesCompleted}',
+                          label: 'Quizzes Completed',
+                          color: AppColors.glamPink,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: _StatCard(
+                          value: progress.categoriesMastered,
+                          label: 'Categories Mastered',
+                          color: AppColors.bitcoinOrange,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text('Badges', style: textTheme.headlineSmall),
+                      ),
+                      Text(
+                        '$unlockedCount of ${_badges.length} unlocked',
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: AppColors.mutedMauve,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  GridView.count(
+                    crossAxisCount: 3,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 0.8,
+                    children: [
+                      for (var i = 0; i < _badges.length; i++)
+                        BadgeTile(
+                          icon: _badges[i].icon,
+                          label: _badges[i].label,
+                          iconColor: _badges[i].iconColor,
+                          backgroundColor: _badges[i].backgroundColor,
+                          locked: i >= unlockedCount,
+                        ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 20),
-            const _LevelCard(),
-            const SizedBox(height: 20),
-            const _StreakCard(),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: _StatCard(
-                    value: '${MockProgress.quizzesCompleted}',
-                    label: 'Quizzes Completed',
-                    color: AppColors.glamPink,
-                  ),
-                ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: _StatCard(
-                    value: MockProgress.categoriesMastered,
-                    label: 'Categories Mastered',
-                    color: AppColors.bitcoinOrange,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            Row(
-              children: [
-                Expanded(
-                  child: Text('Badges', style: textTheme.headlineSmall),
-                ),
-                Text(
-                  '$unlockedCount of ${_badges.length} unlocked',
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: AppColors.mutedMauve,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 8,
-              childAspectRatio: 0.8,
-              children: [
-                for (var i = 0; i < _badges.length; i++)
-                  BadgeTile(
-                    icon: _badges[i].icon,
-                    label: _badges[i].label,
-                    iconColor: _badges[i].iconColor,
-                    backgroundColor: _badges[i].backgroundColor,
-                    locked: i >= unlockedCount,
-                  ),
-              ],
-            ),
-          ],
-        ),
-      ),
       bottomNavigationBar: AppBottomNavBar(
         currentIndex: 3,
         onTap: (index) => _onTabTap(context, index),
@@ -188,7 +210,9 @@ class JourneyScreen extends StatelessWidget {
 }
 
 class _LevelCard extends StatelessWidget {
-  const _LevelCard();
+  const _LevelCard({required this.progress});
+
+  final UserProgress progress;
 
   @override
   Widget build(BuildContext context) {
@@ -218,17 +242,17 @@ class _LevelCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Level ${MockProgress.level} ✨',
+            'Level ${progress.level} ✨',
             style: textTheme.displaySmall?.copyWith(color: AppColors.bloomWhite),
           ),
           const SizedBox(height: 18),
-          const GlowProgressBar(progress: MockProgress.xpProgress),
+          GlowProgressBar(progress: progress.xpProgress),
           const SizedBox(height: 8),
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              '${MockProgress.xpCurrent} / ${MockProgress.xpTarget} XP to '
-              'Level ${MockProgress.level + 1}',
+              '${progress.xpCurrent} / ${progress.xpTarget} XP to '
+              'Level ${progress.level + 1}',
               style: textTheme.bodySmall?.copyWith(
                 color: AppColors.bloomWhite.withValues(alpha: 0.85),
               ),
@@ -241,7 +265,9 @@ class _LevelCard extends StatelessWidget {
 }
 
 class _StreakCard extends StatelessWidget {
-  const _StreakCard();
+  const _StreakCard({required this.progress});
+
+  final UserProgress progress;
 
   @override
   Widget build(BuildContext context) {
@@ -257,14 +283,14 @@ class _StreakCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    '${MockProgress.currentStreak} Day Streak 🔥',
+                    '${progress.currentStreak} Day Streak 🔥',
                     style: textTheme.headlineSmall,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Best: ${MockProgress.bestStreak} days 🏆',
+                  'Best: ${progress.bestStreak} days 🏆',
                   style: textTheme.bodyMedium?.copyWith(
                     color: AppColors.mutedMauve,
                   ),
@@ -272,7 +298,7 @@ class _StreakCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            StreakDayRow(states: MockProgress.streakStates),
+            StreakDayRow(states: progress.streakStates),
           ],
         ),
       ),

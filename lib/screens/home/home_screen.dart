@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../data/mock_progress.dart';
+import '../../data/progress_repository.dart';
 import '../../data/quiz_repository.dart';
+import '../../data/user_progress.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_card.dart';
@@ -15,8 +16,26 @@ import '../quiz/quiz_categories_screen.dart';
 import '../quiz/quiz_landing_screen.dart';
 import 'widgets/app_bottom_nav_bar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  UserProgress? _progress;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProgress();
+  }
+
+  Future<void> _loadProgress() async {
+    final progress = await ProgressRepository.instance.load();
+    if (mounted) setState(() => _progress = progress);
+  }
 
   void _onTabTap(BuildContext context, int index) {
     switch (index) {
@@ -40,6 +59,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final progress = _progress;
 
     return Scaffold(
       backgroundColor: AppColors.softBabyPink,
@@ -49,46 +69,49 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         actionsIconTheme: const IconThemeData(color: AppColors.glamPink),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Hi, Bestie 👋', style: textTheme.headlineLarge),
-            const SizedBox(height: 4),
-            Text(
-              'Ready for today\'s glow-up?',
-              style: textTheme.bodyMedium?.copyWith(
-                color: AppColors.mutedMauve,
+      body: progress == null
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Hi, Bestie 👋', style: textTheme.headlineLarge),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Ready for today\'s glow-up?',
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: AppColors.mutedMauve,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  _JourneyStripCard(progress: progress),
+                  const SizedBox(height: 20),
+                  _StreakCard(progress: progress),
+                  const SizedBox(height: 20),
+                  _ContinueWithBelleCard(
+                    progress: progress,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const BelleScreen()),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const SectionLabel('Bitcoin Beauty Tip'),
+                  const SizedBox(height: 12),
+                  const _TipCard(),
+                  const SizedBox(height: 24),
+                  const SectionLabel('Quick Practice'),
+                  const SizedBox(height: 12),
+                  _QuickPracticeRow(
+                    onSelect: (difficulty) => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => QuizLandingScreen(difficulty: difficulty),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 20),
-            const _JourneyStripCard(),
-            const SizedBox(height: 20),
-            const _StreakCard(),
-            const SizedBox(height: 20),
-            _ContinueWithBelleCard(
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const BelleScreen()),
-              ),
-            ),
-            const SizedBox(height: 20),
-            const SectionLabel('Bitcoin Beauty Tip'),
-            const SizedBox(height: 12),
-            const _TipCard(),
-            const SizedBox(height: 24),
-            const SectionLabel('Quick Practice'),
-            const SizedBox(height: 12),
-            _QuickPracticeRow(
-              onSelect: (difficulty) => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => QuizLandingScreen(difficulty: difficulty),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
       bottomNavigationBar: AppBottomNavBar(
         currentIndex: 0,
         onTap: (index) => _onTabTap(context, index),
@@ -98,11 +121,13 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _JourneyStripCard extends StatelessWidget {
-  const _JourneyStripCard();
+  const _JourneyStripCard({required this.progress});
+
+  final UserProgress progress;
 
   @override
   Widget build(BuildContext context) {
-    final percent = (MockProgress.xpProgress * 100).round();
+    final percent = (progress.xpProgress * 100).round();
 
     return Container(
       width: double.infinity,
@@ -126,7 +151,7 @@ class _JourneyStripCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 14),
-          const GlowProgressBar(progress: MockProgress.xpProgress),
+          GlowProgressBar(progress: progress.xpProgress),
           const SizedBox(height: 8),
           Text(
             '$percent% to next level',
@@ -141,7 +166,9 @@ class _JourneyStripCard extends StatelessWidget {
 }
 
 class _StreakCard extends StatelessWidget {
-  const _StreakCard();
+  const _StreakCard({required this.progress});
+
+  final UserProgress progress;
 
   @override
   Widget build(BuildContext context) {
@@ -152,15 +179,15 @@ class _StreakCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${MockProgress.currentStreak} Day Streak 🔥',
+              '${progress.currentStreak} Day Streak 🔥',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
-            StreakDayRow(states: MockProgress.streakStates),
+            StreakDayRow(states: progress.streakStates),
             const SizedBox(height: 16),
             Center(
               child: Text(
-                MockProgress.currentStreak == 0
+                progress.currentStreak == 0
                     ? 'Start your streak today!'
                     : 'Keep glowing — come back tomorrow!',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -176,8 +203,9 @@ class _StreakCard extends StatelessWidget {
 }
 
 class _ContinueWithBelleCard extends StatelessWidget {
-  const _ContinueWithBelleCard({required this.onTap});
+  const _ContinueWithBelleCard({required this.progress, required this.onTap});
 
+  final UserProgress progress;
   final VoidCallback onTap;
 
   @override
@@ -206,7 +234,7 @@ class _ContinueWithBelleCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      MockProgress.isFreshAccount
+                      progress.isFreshAccount
                           ? 'Start Chatting with Belle'
                           : 'Continue with Belle',
                       style: textTheme.titleLarge?.copyWith(
@@ -215,7 +243,7 @@ class _ContinueWithBelleCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      MockProgress.isFreshAccount
+                      progress.isFreshAccount
                           ? "She's ready to help you learn"
                           : 'Pick up where you left off',
                       style: textTheme.bodyMedium?.copyWith(
