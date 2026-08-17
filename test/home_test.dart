@@ -18,7 +18,7 @@ void main() {
 
     expect(tester.takeException(), isNull);
     expect(find.text('Hi, Bestie 👋'), findsOneWidget);
-    expect(find.text('Continue with Belle'), findsOneWidget);
+    expect(find.text('Start Chatting with Belle'), findsOneWidget);
     expect(find.text('Beginner'), findsOneWidget);
   });
 }

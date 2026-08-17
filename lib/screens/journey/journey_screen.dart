@@ -18,14 +18,12 @@ class _BadgeData {
     required this.label,
     this.iconColor = AppColors.mutedMauve,
     this.backgroundColor = const Color(0xFFEDE3E7),
-    this.locked = false,
   });
 
   final IconData icon;
   final String label;
   final Color iconColor;
   final Color backgroundColor;
-  final bool locked;
 }
 
 const _creamBg = Color(0xFFFCEFD1);
@@ -68,21 +66,9 @@ const _badges = [
     iconColor: AppColors.bitcoinOrange,
     backgroundColor: _creamBg,
   ),
-  _BadgeData(
-    icon: Icons.school_rounded,
-    label: 'Intermediate Master',
-    locked: true,
-  ),
-  _BadgeData(
-    icon: Icons.school_rounded,
-    label: 'Advanced Master',
-    locked: true,
-  ),
-  _BadgeData(
-    icon: Icons.favorite_rounded,
-    label: "Belle's Best Friend",
-    locked: true,
-  ),
+  _BadgeData(icon: Icons.school_rounded, label: 'Intermediate Master'),
+  _BadgeData(icon: Icons.school_rounded, label: 'Advanced Master'),
+  _BadgeData(icon: Icons.favorite_rounded, label: "Belle's Best Friend"),
 ];
 
 class JourneyScreen extends StatelessWidget {
@@ -110,7 +96,7 @@ class JourneyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final unlockedCount = _badges.where((b) => !b.locked).length;
+    final unlockedCount = MockProgress.unlockedBadgeCount;
 
     return Scaffold(
       backgroundColor: AppColors.softBabyPink,
@@ -180,13 +166,13 @@ class JourneyScreen extends StatelessWidget {
               crossAxisSpacing: 8,
               childAspectRatio: 0.8,
               children: [
-                for (final badge in _badges)
+                for (var i = 0; i < _badges.length; i++)
                   BadgeTile(
-                    icon: badge.icon,
-                    label: badge.label,
-                    iconColor: badge.iconColor,
-                    backgroundColor: badge.backgroundColor,
-                    locked: badge.locked,
+                    icon: _badges[i].icon,
+                    label: _badges[i].label,
+                    iconColor: _badges[i].iconColor,
+                    backgroundColor: _badges[i].backgroundColor,
+                    locked: i >= unlockedCount,
                   ),
               ],
             ),

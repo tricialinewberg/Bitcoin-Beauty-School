@@ -158,7 +158,9 @@ class _StreakCard extends StatelessWidget {
             const SizedBox(height: 16),
             Center(
               child: Text(
-                'Keep glowing — come back tomorrow!',
+                MockProgress.currentStreak == 0
+                    ? 'Start your streak today!'
+                    : 'Keep glowing — come back tomorrow!',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: AppColors.mutedMauve,
                 ),
@@ -202,14 +204,18 @@ class _ContinueWithBelleCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Continue with Belle',
+                      MockProgress.isFreshAccount
+                          ? 'Start Chatting with Belle'
+                          : 'Continue with Belle',
                       style: textTheme.titleLarge?.copyWith(
                         color: AppColors.bloomWhite,
                       ),
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'Pick up where you left off',
+                      MockProgress.isFreshAccount
+                          ? "She's ready to help you learn"
+                          : 'Pick up where you left off',
                       style: textTheme.bodyMedium?.copyWith(
                         color: AppColors.bloomWhite.withValues(alpha: 0.9),
                       ),

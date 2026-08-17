@@ -18,7 +18,8 @@ void main() {
 
     expect(tester.takeException(), isNull);
     expect(find.text('Your Journey'), findsOneWidget);
-    expect(find.text('Level 3 ✨'), findsOneWidget);
+    expect(find.text('Level 1 ✨'), findsOneWidget);
     expect(find.text("Belle's Best Friend"), findsOneWidget);
+    expect(find.text('0 of 9 unlocked'), findsOneWidget);
   });
 }
