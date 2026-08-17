@@ -17,6 +17,7 @@ class AppButton extends StatelessWidget {
     this.variant = AppButtonVariant.primary,
     this.icon,
     this.expand = true,
+    this.padding,
   });
 
   final String label;
@@ -24,6 +25,7 @@ class AppButton extends StatelessWidget {
   final AppButtonVariant variant;
   final IconData? icon;
   final bool expand;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +55,15 @@ class AppButton extends StatelessWidget {
           Icon(icon, size: 20, color: foregroundColor),
           const SizedBox(width: 8),
         ],
-        Text(
-          label,
-          style: textTheme.labelLarge?.copyWith(color: foregroundColor),
+        Flexible(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              label,
+              style: textTheme.labelLarge?.copyWith(color: foregroundColor),
+              maxLines: 1,
+            ),
+          ),
         ),
       ],
     );
@@ -79,7 +87,9 @@ class AppButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           disabledBackgroundColor: AppColors.mutedMauve.withValues(alpha: 0.3),
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          padding:
+              padding ??
+              const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           elevation: 0,
           shape: StadiumBorder(
             side: isSecondary

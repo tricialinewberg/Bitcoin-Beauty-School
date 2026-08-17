@@ -1,10 +1,9 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../theme/app_colors.dart';
 import '../../widgets/app_card.dart';
+import '../../widgets/dashed_circle_painter.dart';
 import '../../widgets/detail_app_bar.dart';
 import '../../widgets/section_label.dart';
 
@@ -36,7 +35,7 @@ class DonateScreen extends StatelessWidget {
                 width: 140,
                 height: 140,
                 child: CustomPaint(
-                  painter: _DashedCirclePainter(
+                  painter: DashedCirclePainter(
                     color: AppColors.bitcoinOrange.withValues(alpha: 0.4),
                   ),
                   child: Center(
@@ -144,38 +143,4 @@ class DonateScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class _DashedCirclePainter extends CustomPainter {
-  const _DashedCirclePainter({required this.color});
-
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
-
-    final radius = size.width / 2;
-    final rect = Rect.fromCircle(
-      center: Offset(size.width / 2, size.height / 2),
-      radius: radius,
-    );
-
-    const dashCount = 36;
-    const sweepPerDash = (2 * math.pi) / dashCount * 0.6;
-    const gapPerDash = (2 * math.pi) / dashCount - sweepPerDash;
-
-    var start = 0.0;
-    for (var i = 0; i < dashCount; i++) {
-      canvas.drawArc(rect, start, sweepPerDash, false, paint);
-      start += sweepPerDash + gapPerDash;
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _DashedCirclePainter oldDelegate) =>
-      oldDelegate.color != color;
 }
