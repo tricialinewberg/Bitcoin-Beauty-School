@@ -56,6 +56,10 @@ void main() {
       await tester.pumpAndSettle();
     }
 
+    // Always tapping option "A" gives a randomized (not guaranteed-passing)
+    // score, so this only checks the result screen renders correctly — the
+    // 8/10 pass-threshold gating is covered deterministically in
+    // quiz_result_screen_test.dart.
     expect(tester.takeException(), isNull);
     expect(
       find.byWidgetPredicate(
@@ -64,10 +68,11 @@ void main() {
       findsOneWidget,
     );
     expect(find.textContaining('XP'), findsOneWidget);
-    expect(find.text('Try Intermediate Level →'), findsOneWidget);
-    expect(find.text('Back to Quizzes'), findsOneWidget);
+    final backButtonFinder = find.text('Back to Quizzes');
+    expect(backButtonFinder, findsOneWidget);
 
-    await tester.tap(find.text('Back to Quizzes'));
+    await tester.ensureVisible(backButtonFinder);
+    await tester.tap(backButtonFinder);
     await tester.pumpAndSettle();
 
     expect(find.text('Beauty Quizzes 💅'), findsOneWidget);

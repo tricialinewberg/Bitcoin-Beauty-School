@@ -38,14 +38,14 @@ const _categories = [
     description: "You know the basics. Let's level up your glow.",
     icon: Icons.auto_awesome_rounded,
     badgeColor: AppColors.bitcoinOrange,
-    badgeAlignment: Alignment.topRight,
+    badgeAlignment: Alignment.topCenter,
   ),
   _CategoryInfo(
     difficulty: QuizDifficulty.advanced,
     description: 'For certified Bitcoin besties. Prove it.',
     icon: Icons.diamond_rounded,
     badgeColor: AppColors.deepGlamPink,
-    badgeAlignment: Alignment.topCenter,
+    badgeAlignment: Alignment.topRight,
   ),
 ];
 
@@ -100,6 +100,7 @@ class QuizCategoriesScreen extends StatelessWidget {
             for (var i = 0; i < _categories.length; i++) ...[
               if (i != 0) const SizedBox(height: 24),
               _CategoryCard(
+                key: ValueKey(_categories[i].difficulty),
                 info: _categories[i],
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
@@ -121,7 +122,7 @@ class QuizCategoriesScreen extends StatelessWidget {
 }
 
 class _CategoryCard extends StatelessWidget {
-  const _CategoryCard({required this.info, required this.onTap});
+  const _CategoryCard({super.key, required this.info, required this.onTap});
 
   final _CategoryInfo info;
   final VoidCallback onTap;
@@ -137,44 +138,58 @@ class _CategoryCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: _badgeSize / 2),
-          child: Material(
-            color: AppColors.bloomWhite,
-            borderRadius: BorderRadius.circular(24),
-            child: InkWell(
-              onTap: onTap,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 190),
+            child: Material(
+              color: AppColors.bloomWhite,
               borderRadius: BorderRadius.circular(24),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(info.difficulty.label, style: textTheme.headlineMedium),
-                    const SizedBox(height: 8),
-                    Text(
-                      info.description,
-                      style: textTheme.bodyLarge?.copyWith(
-                        color: AppColors.mutedMauve,
+              child: InkWell(
+                onTap: onTap,
+                borderRadius: BorderRadius.circular(24),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        info.difficulty.label,
+                        style: textTheme.headlineMedium,
                       ),
-                    ),
-                    const SizedBox(height: 14),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Take the Quiz',
-                          style: textTheme.labelLarge?.copyWith(
-                            color: AppColors.glamPink,
+                      const SizedBox(height: 8),
+                      // Fixed height (not just maxLines) so card height
+                      // doesn't depend on whether a description happens to
+                      // wrap to 1 or 2 lines.
+                      SizedBox(
+                        height: 44,
+                        child: Text(
+                          info.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: textTheme.bodyLarge?.copyWith(
+                            color: AppColors.mutedMauve,
                           ),
                         ),
-                        const SizedBox(width: 6),
-                        const Icon(
-                          Icons.arrow_forward_rounded,
-                          size: 18,
-                          color: AppColors.glamPink,
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      const SizedBox(height: 14),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Take the Quiz',
+                            style: textTheme.labelLarge?.copyWith(
+                              color: AppColors.glamPink,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          const Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 18,
+                            color: AppColors.glamPink,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

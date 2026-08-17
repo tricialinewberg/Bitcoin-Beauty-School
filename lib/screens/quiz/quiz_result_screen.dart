@@ -19,6 +19,9 @@ class QuizResultScreen extends StatelessWidget {
 
   double get _percent => total == 0 ? 0 : score / total;
 
+  /// Only the passing tier (80%+) unlocks progression to the next level.
+  bool get _passed => _percent >= 0.8;
+
   ({String headline, String subtitle, String belleQuote}) get _copy {
     if (_percent == 1) {
       return (
@@ -27,24 +30,28 @@ class QuizResultScreen extends StatelessWidget {
         belleQuote: "I'm so proud of you! Ready for the next level? 💕",
       );
     }
-    if (_percent >= 0.8) {
+    if (_passed) {
       return (
         headline: "You're Glowing! ✨",
         subtitle: 'Almost perfect, bestie — you really know your stuff.',
         belleQuote: "I'm so proud of you! Ready for the next level? 💕",
       );
     }
-    if (_percent >= 0.5) {
+    if (_percent >= 0.6) {
       return (
-        headline: 'Nice Progress! 🌸',
-        subtitle: "Good start! A little more practice and you'll be glowing.",
+        headline: 'So Close! 💪',
+        subtitle:
+            "You're getting the hang of it — a bit more practice and "
+            "you'll ace it.",
         belleQuote: "You're getting there! I believe in you. 💪",
       );
     }
     return (
-      headline: 'Keep Practicing! 💪',
-      subtitle: "Every expert started somewhere. Let's try again!",
-      belleQuote: "Don't worry, bestie — let's review and try again together. 💕",
+      headline: "Let's Glow Up Your Knowledge 🌱",
+      subtitle: "This one needs a little more practice — that's what the "
+          "journey's for.",
+      belleQuote: "No worries, bestie — even the best glow-ups take a few "
+          'tries. Want to review and come back stronger? 💕',
     );
   }
 
@@ -60,10 +67,8 @@ class QuizResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final copy = _copy;
-    final ringColor = _percent >= 0.5
-        ? AppColors.successGlow
-        : AppColors.bitcoinOrange;
-    final next = difficulty.next;
+    final ringColor = _passed ? AppColors.successGlow : AppColors.bitcoinOrange;
+    final next = _passed ? difficulty.next : null;
 
     return Scaffold(
       backgroundColor: AppColors.softBabyPink,
@@ -126,7 +131,7 @@ class QuizResultScreen extends StatelessWidget {
                   label: '+50 XP',
                   labelColor: AppColors.shadowWalletGray,
                 ),
-                if (_percent >= 0.8) ...[
+                if (_passed) ...[
                   const SizedBox(width: 12),
                   const _ResultChip(
                     icon: Icons.emoji_events_rounded,
