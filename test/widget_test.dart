@@ -1,10 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bitcoin_beauty_school/main.dart';
 import 'package:bitcoin_beauty_school/screens/splash/splash_screen.dart';
 
 void main() {
   testWidgets('App boots into the splash screen', (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
+
     await tester.pumpWidget(const BitcoinBeautySchoolApp());
 
     expect(find.byType(SplashScreen), findsOneWidget);

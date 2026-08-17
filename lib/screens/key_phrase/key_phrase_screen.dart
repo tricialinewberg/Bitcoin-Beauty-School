@@ -1,26 +1,15 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../data/identity_repository.dart';
+import '../../data/progress_repository.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_card.dart';
 import '../../widgets/detail_app_bar.dart';
 import '../../widgets/section_label.dart';
+import '../home/home_screen.dart';
 
-/// Placeholder bank of full beauty-themed phrases. Real key-phrase
-/// generation and Nostr derivation land in a later session.
-const _mockPhraseBank = [
-  'My blush never goes out of style',
-  'Glow eternal, secret key',
-  'Red lipstick, hidden balance',
-  'Soft power, sharp focus',
-  'Velvet touch, iron grip',
-];
-
-/// UI-only for now — reveal/restore are mocked. Real Nostr key derivation
-/// and relay sync land in a later session.
 class KeyPhraseScreen extends StatefulWidget {
   const KeyPhraseScreen({super.key});
 
@@ -29,11 +18,21 @@ class KeyPhraseScreen extends StatefulWidget {
 }
 
 class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
-  late final _mockPhrase =
-      _mockPhraseBank[Random().nextInt(_mockPhraseBank.length)];
-
   final _restoreController = TextEditingController();
   bool _revealed = false;
+  bool _restoring = false;
+  String? _phrase;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPhrase();
+  }
+
+  Future<void> _loadPhrase() async {
+    final phrase = await IdentityRepository.instance.ensureIdentity();
+    if (mounted) setState(() => _phrase = phrase);
+  }
 
   @override
   void dispose() {
@@ -42,29 +41,43 @@ class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
   }
 
   void _copyPhrase() {
-    Clipboard.setData(ClipboardData(text: _mockPhrase));
+    final phrase = _phrase;
+    if (phrase == null) return;
+    Clipboard.setData(ClipboardData(text: phrase));
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Key phrase copied')),
     );
   }
 
-  void _restoreAccount() {
-    if (_restoreController.text.trim().isEmpty) {
+  Future<void> _restoreAccount() async {
+    final typed = _restoreController.text.trim();
+    if (typed.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Enter a key phrase first')),
       );
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Account restore isn't wired up yet — coming soon!"),
-      ),
+
+    setState(() => _restoring = true);
+
+    // Re-deriving keys and clearing the local cache means the next load
+    // fetches (or falls back to fresh) under the *new* identity, not
+    // whatever was cached for the old one.
+    await IdentityRepository.instance.restoreFromPhrase(typed);
+    await ProgressRepository.instance.clearLocalCache();
+    await ProgressRepository.instance.load();
+
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+      (route) => false,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final phrase = _phrase;
 
     return Scaffold(
       backgroundColor: AppColors.softBabyPink,
@@ -90,9 +103,21 @@ class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
                 child: Column(
                   children: [
-                    _revealed
-                        ? _RevealedPhrase(phrase: _mockPhrase)
-                        : const _BlurredPlaceholder(),
+                    if (phrase == null)
+                      const SizedBox(
+                        height: 44,
+                        child: Center(
+                          child: SizedBox(
+                            width: 22,
+                            height: 22,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        ),
+                      )
+                    else if (_revealed)
+                      _RevealedPhrase(phrase: phrase)
+                    else
+                      const _BlurredPlaceholder(),
                     const SizedBox(height: 20),
                     AppButton(
                       label: _revealed ? 'Hide' : 'Reveal',
@@ -100,7 +125,9 @@ class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
                           ? Icons.visibility_off_rounded
                           : Icons.visibility_rounded,
                       expand: false,
-                      onPressed: () => setState(() => _revealed = !_revealed),
+                      onPressed: phrase == null
+                          ? null
+                          : () => setState(() => _revealed = !_revealed),
                     ),
                   ],
                 ),
@@ -111,7 +138,7 @@ class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
               label: 'Copy Phrase',
               icon: Icons.copy_rounded,
               variant: AppButtonVariant.secondary,
-              onPressed: _copyPhrase,
+              onPressed: phrase == null ? null : _copyPhrase,
             ),
             const SizedBox(height: 16),
             Container(
@@ -163,10 +190,14 @@ class _KeyPhraseScreenState extends State<KeyPhraseScreen> {
             const SizedBox(height: 16),
             TextField(
               controller: _restoreController,
+              enabled: !_restoring,
               decoration: const InputDecoration(hintText: 'Enter your key phrase...'),
             ),
             const SizedBox(height: 16),
-            AppButton(label: 'Restore Account', onPressed: _restoreAccount),
+            AppButton(
+              label: _restoring ? 'Restoring…' : 'Restore Account',
+              onPressed: _restoring ? null : _restoreAccount,
+            ),
           ],
         ),
       ),

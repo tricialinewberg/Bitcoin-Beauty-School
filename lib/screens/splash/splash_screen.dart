@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/identity_repository.dart';
 import '../../theme/app_colors.dart';
 import '../onboarding/onboarding_screen.dart';
 
@@ -17,7 +18,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(_displayDuration, _goToOnboarding);
+    // Run the splash timer and identity bootstrap concurrently — first
+    // launch generates and persists a suggested key phrase, later
+    // launches just load the existing one. Either way Home always has an
+    // active identity to read/write progress against by the time it's
+    // reached.
+    Future.wait([
+      Future.delayed(_displayDuration),
+      IdentityRepository.instance.ensureIdentity(),
+    ]).then((_) => _goToOnboarding());
   }
 
   void _goToOnboarding() {
