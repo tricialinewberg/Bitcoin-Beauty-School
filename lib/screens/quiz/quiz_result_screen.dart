@@ -55,6 +55,14 @@ class QuizResultScreen extends StatelessWidget {
     );
   }
 
+  /// Green for the passing tier, Bitcoin Orange for "So Close!", and a
+  /// neutral muted tone for the tier that most needs review.
+  Color get _ringColor {
+    if (_passed) return AppColors.successGlow;
+    if (_percent >= 0.6) return AppColors.bitcoinOrange;
+    return AppColors.mutedMauve;
+  }
+
   void _backToQuizzes(BuildContext context) {
     // Pop this Result screen and the Landing screen beneath it, back to
     // the categories list.
@@ -67,7 +75,7 @@ class QuizResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final copy = _copy;
-    final ringColor = _passed ? AppColors.successGlow : AppColors.bitcoinOrange;
+    final ringColor = _ringColor;
     final next = _passed ? difficulty.next : null;
 
     return Scaffold(
