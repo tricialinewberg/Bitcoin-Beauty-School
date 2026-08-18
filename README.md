@@ -31,7 +31,13 @@ One deliberate design decision worth calling out: instead of a traditional email
 
 - **Flutter** — cross-platform app development
 - **Belle AI** — conversational AI integration for the in-app learning companion
-- Local-first key phrase authentication (no traditional login/signup)
+- **Nostr** — the key phrase deterministically derives a Nostr keypair (same idea as a BIP-39 seed deriving Bitcoin keys), and that keypair is the account: no servers, no traditional login, progress and chat history sync as encrypted Nostr events instead of rows in a database
+
+### A design note: why "Belle" isn't really a second party
+
+Belle's chat history is stored using NIP-17 (Nostr's private direct message standard), which is built for two independent people who each keep their own private key secret. Belle isn't an independent person on the network — she's a persona inside the app with no server-side identity of her own. That's a real mismatch, and the easy fix (give the app one hardcoded "Belle" keypair, shared across every install) would be a privacy bug wearing a feature's clothes: that private key would ship inside the app binary on every device, so it wouldn't actually be private, and the "encrypted" conversation would be readable by anyone who bothered to extract it.
+
+The fix: Belle's keypair is derived from the *same* key phrase as the user's own identity, just with a different derivation tag — the same one-way process, just two different labels going in. Nothing is shared across installs and nothing is hardcoded. The honest way to describe what this buys you: it's not a conversation with an independent Belle identity, it's the user's own client having a structured conversation with itself, wrapped in NIP-17's envelope for its metadata-privacy properties. Anyone who has the key phrase can derive both keys and read both sides — which is exactly the same person in every real scenario, since having the phrase already means having the whole account.
 
 
 ## Design
