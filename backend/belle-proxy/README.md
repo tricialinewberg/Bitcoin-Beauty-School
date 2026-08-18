@@ -1,5 +1,7 @@
 # Belle Proxy
 
+> **⚠️ Not currently in use.** Belle was redesigned to answer from a scripted, offline, keyword-matched response system (see [`content/belle/belle_scripted_responses.json`](../../content/belle/belle_scripted_responses.json) and `lib/services/belle_response_matcher.dart`) instead of a live LLM — no ongoing API cost, no network dependency, nothing to rate-limit or secure. This Worker is **not deployed and the app does not call it.** The code below is preserved as-is in case that decision is revisited (e.g. if scripted responses turn out too limited for some future need) — it was fully built, unit-tested, and verified locally (see "Verifying it actually works" below) before the direction changed, so it's ready to pick back up rather than rebuild from scratch. Don't deploy it or wire the app to it without re-confirming the cost/complexity trade-off still makes sense at that point.
+
 A small Cloudflare Worker that mediates every call to Claude on Belle's behalf, so the Anthropic API key never has to exist inside the Flutter app binary or any client-side code.
 
 ```
