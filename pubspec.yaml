@@ -40,7 +40,12 @@ dependencies:
   http: ^1.6.0
   crypto: ^3.0.7
   web_socket_channel: ^3.0.3
-  flutter_secure_storage: ^11.0.0
+  # Pinned below ^11.0.0: that major requires compileSdk 37, which isn't
+  # reliably resolvable via sdkmanager yet (verified locally — the
+  # auto-installed platform lands as "android-37.0", not the "android-37"
+  # Gradle actually looks for, and the build fails to find it). 10.3.1
+  # only needs compileSdk 36, which matches Flutter's current default.
+  flutter_secure_storage: ^10.3.1
 
 dev_dependencies:
   flutter_test:
