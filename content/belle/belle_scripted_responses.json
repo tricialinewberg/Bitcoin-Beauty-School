@@ -1,0 +1,103 @@
+{
+  "_notes": "Scripted Belle responses — no LLM involved, zero ongoing API cost. Matched by keyword against user input. Each topic includes English keywords (app is English-only per project decision) and a response written in Belle's established voice (warm, casual, BFF energy, analogy where one genuinely helps, plain explanation otherwise — see belle_system_prompt.md for full voice rules, which still apply as writing guidelines even without a live LLM). Covers all 15 concepts across the 90-question quiz bank's three tiers.",
+
+  "topics": [
+    {
+      "id": "satoshi",
+      "tier": "beginner",
+      "keywords": ["satoshi", "sats", "smallest unit", "100 million", "satoshi nakamoto unit"],
+      "response": "A satoshi (or \"sat\" for short) is the smallest unit of bitcoin — kind of like how a cent is the smallest unit of a dollar. One bitcoin = 100,000,000 sats. So even if a whole bitcoin feels like a big, intimidating number someday, you can always buy or hold just a few sats worth — no need to own a \"whole\" one. It's named after Satoshi Nakamoto, the mysterious creator of Bitcoin who's never been publicly identified. Tiny unit, big idea. 💫"
+    },
+    {
+      "id": "wallets",
+      "tier": "beginner",
+      "keywords": ["wallet", "hot wallet", "cold wallet", "custodial wallet", "seed phrase basics"],
+      "response": "Think of a Bitcoin wallet like your favorite little makeup pouch — cute, secure, and practical. But here's the twist: it doesn't actually hold your bitcoin inside it (bitcoin isn't a physical thing tucked away somewhere). What it really holds is your *keys* — basically the proof that certain bitcoin on the network belongs to you. Only you should have access to that pouch. There are a few flavors: hot wallets (connected to the internet, more convenient, slightly more exposed) and cold wallets (offline, less convenient, way more secure) — and whether YOU hold the keys (self-custody) or a company holds them for you (custodial). Your wallet also gives you a seed phrase — a backup list of words that can recreate your whole pouch if you ever lose your device. Guard it like you'd guard your most expensive lipstick formula. 💄"
+    },
+    {
+      "id": "blockchain_basics",
+      "tier": "beginner",
+      "keywords": ["blockchain", "block", "ledger", "chain of blocks", "how does bitcoin work"],
+      "response": "Picture blockchain like a transparent makeup bag — a nécessaire transparente. You can see everything inside it, nothing's hidden, and nothing can be swapped out without everyone noticing. That's exactly what the blockchain is: a public list of every Bitcoin transaction ever made, grouped into \"blocks,\" each one linked to the one before it. Because each block references the last one, going back and secretly changing an old transaction would be like trying to sneak a product out of that see-through bag without anyone clocking it — basically impossible once enough new blocks have piled on top. Thousands of computers around the world keep their own copy of this bag, so there's no single company or government holding the one \"real\" version. 🔗"
+    },
+    {
+      "id": "custody",
+      "tier": "beginner",
+      "keywords": ["custody", "self custody", "not your keys not your coins", "third party custody", "who controls my bitcoin"],
+      "response": "Custody is just a fancy word for \"who actually controls the keys, and therefore who can actually move the bitcoin.\" If YOU hold your own keys, that's self-custody — total control, but also total responsibility (lose your seed phrase, and there's no customer support line to call). If a company holds your keys for you — like an exchange — that's third-party custody: more convenient, but you're trusting them not to freeze your funds, get hacked, or go under. You'll hear the phrase \"not your keys, not your coins\" a lot in the Bitcoin world — it's basically this whole idea in one sassy little sentence. This app's own key phrase system is actually a mini example of self-custody in action — no company holding anything for you, just you and your phrase. 🔑"
+    },
+    {
+      "id": "utxos",
+      "tier": "intermediate",
+      "keywords": ["utxo", "unspent transaction output", "how does balance work", "change output"],
+      "response": "Bitcoin doesn't track your \"balance\" the way a bank app does with one running number. Instead, your bitcoin exists as a bunch of separate chunks called UTXOs (Unspent Transaction Outputs) — like a jewelry box full of individual pieces rather than one melted-down block of gold. When you spend bitcoin, you're using up one or more of those chunks as a whole, and if the chunk is bigger than what you're actually paying, you get a \"change\" chunk back — kind of like paying with a $50 note for a $30 purchase and pocketing the $20 change. Your wallet's \"balance\" is really just the sum of every chunk it can prove is yours. 💎"
+    },
+    {
+      "id": "mempool",
+      "tier": "intermediate",
+      "keywords": ["mempool", "memory pool", "pending transaction", "stuck transaction", "transaction fees waiting"],
+      "response": "The mempool is basically the waiting room before a transaction gets a seat at the table (a block). When you send bitcoin, it doesn't confirm instantly — it sits in this shared waiting area until a miner picks it up and includes it in the next block. Transactions offering a higher fee tend to get called up sooner, since block space is limited and miners prioritize by fee rate. If the waiting room gets crowded (lots of network activity), fees can spike and lower-fee transactions might wait a while. It always clears eventually — just sometimes it's a longer wait than others. ⏳"
+    },
+    {
+      "id": "lightning_basics",
+      "tier": "intermediate",
+      "keywords": ["lightning network", "lightning basics", "layer 2", "payment channel", "instant bitcoin payments"],
+      "response": "Lightning Network is like a VIP fast lane built on top of the regular Bitcoin blockchain. Instead of recording every single tiny payment directly on the main ledger (slow and can get pricier during busy times), two people open a \"channel\" together by locking some funds, and then they can send payments back and forth between themselves instantly and basically for free — all off to the side. Whenever they're done, they can close the channel and the final balance settles back onto the main blockchain in one tidy transaction. It's perfect for frequent, smaller payments — think buying coffee, not buying a house. ⚡"
+    },
+    {
+      "id": "multisig",
+      "tier": "intermediate",
+      "keywords": ["multisig", "multi-signature", "2 of 3", "multiple keys required", "shared wallet security"],
+      "response": "Multisig means a wallet needs more than one key to say \"yes\" before any bitcoin can move — think of it like a beauty brand's product launch needing sign-off from more than one person before it ships. You'll see it written as \"M-of-N\" — like 2-of-3, meaning any 2 out of 3 total keys need to agree. It's a great security upgrade: if you lose one key, or one key gets compromised, your funds are still safe because that one key alone isn't enough to do anything. More coordination required, but way less risk of a single point of failure. 🔐"
+    },
+    {
+      "id": "nodes_vs_miners",
+      "tier": "intermediate",
+      "keywords": ["nodes vs miners", "full node", "what is a miner", "who validates bitcoin", "mining vs node"],
+      "response": "These two get mixed up a lot, but they do very different jobs. A full node is like the strict, detail-obsessed quality-control checker — it downloads and double-checks every single transaction and block against Bitcoin's rules, no exceptions, no shortcuts. A miner is more like the person racing to be first to package up the next batch of transactions and get it approved — using serious computing power to solve a puzzle for the right to do so. Here's the important part: miners don't get to decide what's valid. If a miner tries to sneak through a block that breaks the rules, every node on the network will simply reject it, no matter how much computing power went into making it. Nodes hold the actual authority on what's real; miners just handle the ordering. 🧾"
+    },
+    {
+      "id": "taproot",
+      "tier": "advanced",
+      "keywords": ["taproot", "bip 341", "taproot upgrade", "mast"],
+      "response": "Taproot is a 2021 upgrade that basically gave Bitcoin transactions a really good disguise. Before Taproot, a complex transaction (like one needing multiple signatures) looked visibly different on the blockchain from a simple one. Taproot lets complicated setups look identical to simple ones from the outside — better privacy, since outside observers can't tell which transactions are \"fancy\" and which are basic, plus smaller, cheaper transaction sizes for the complex ones. It's like everyone showing up to the same event in the same effortlessly chic outfit, no matter how much work went into getting ready. ✨"
+    },
+    {
+      "id": "schnorr",
+      "tier": "advanced",
+      "keywords": ["schnorr", "schnorr signature", "signature aggregation"],
+      "response": "Schnorr signatures came in alongside Taproot, and their superpower is combining multiple signatures into one. So if five different people need to sign off on a transaction, instead of five separate visible signatures, Schnorr lets them merge into a single signature that looks exactly like an ordinary one-person signature on-chain. Smaller transaction size, lower fees, and better privacy — because a 5-person multisig transaction can look identical to a single-signer one from the outside. It's the ultimate group project where nobody can tell how many people actually contributed. 🖋️"
+    },
+    {
+      "id": "bips",
+      "tier": "advanced",
+      "keywords": ["bip", "bitcoin improvement proposal", "how does bitcoin change", "who decides bitcoin rules"],
+      "response": "A BIP (Bitcoin Improvement Proposal) is the formal way anyone can suggest a change to how Bitcoin works. Key word: anyone — there's no CEO or company that gets final say. A BIP is just a proposal until enough of the network (developers, node operators, miners, businesses, users) actually agrees to adopt it. No one can force a change through — it's rough consensus, opt-in, and slow by design, which is honestly the whole point: Bitcoin resists any one person or group unilaterally deciding what it becomes. Famous ones you might recognize by number: BIP-39 (seed phrases) and the Taproot upgrade (BIPs 340-342). 📜"
+    },
+    {
+      "id": "lightning_routing",
+      "tier": "advanced",
+      "keywords": ["lightning routing", "htlc", "multi-hop payment", "lightning liquidity"],
+      "response": "Lightning payments don't only work between two people who've directly opened a channel with each other — they can hop across a whole connected network of channels, kind of like your payment finding a chain of mutual friends to reach someone you're not directly connected to. This uses something called HTLCs (Hash Time-Locked Contracts) — a clever bit of cryptography making sure the whole multi-hop payment either completes fully, end to end, or fails safely with nobody in the middle able to skim off the top. Routing nodes along the way usually charge a tiny fee for helping the payment along, which is what keeps them motivated to stay online and keep good liquidity available. 🔀"
+    },
+    {
+      "id": "privacy_coinjoin",
+      "tier": "advanced",
+      "keywords": ["coinjoin", "privacy bitcoin", "pseudonymous", "chain analysis"],
+      "response": "Bitcoin is pseudonymous, not anonymous — every transaction is public forever, and with enough digging, patterns can sometimes get linked back to real identities. CoinJoin is a privacy technique where multiple people combine their transactions into one big transaction with lots of mixed-together inputs and outputs, making it much harder for outside observers to figure out who paid whom. Nobody's funds actually get mixed up in a shady way — everyone still ends up with exactly what's theirs — it just becomes way harder to trace the specific link from a specific input to a specific output from the outside. Kind of like everyone dropping their bags in one big shared tote for a second so nobody can tell whose lipstick is whose. 🕶️"
+    },
+    {
+      "id": "consensus_mechanics",
+      "tier": "advanced",
+      "keywords": ["consensus", "proof of work", "difficulty adjustment", "51% attack", "how bitcoin agrees"],
+      "response": "Bitcoin's whole system runs on Proof-of-Work — miners burn real computing power competing to add the next block, and the network trusts whichever chain has the most accumulated work behind it. Roughly every two weeks, the network automatically adjusts how hard that puzzle is, keeping new blocks arriving around every 10 minutes no matter how much total mining power has joined or left. You might've heard of a \"51% attack\" — a scenario where one entity controls most of the network's power. Even then, they still can't steal anyone else's funds or rewrite the rules; the most they could theoretically do is mess with their own very recent transactions. The rules themselves are enforced by nodes checking every block, not by raw computing power alone. ⚙️"
+    }
+  ],
+
+  "fallback": {
+    "no_match": "Honestly, that's outside what I know well right now — I don't want to guess and get it wrong for you. Try asking me about wallets, blockchain, UTXOs, Lightning, mining, privacy, or any of the other Bitcoin basics — I've got a lot to say about those! 💕",
+    "financial_advice_attempt": "That one's outside my lane, bestie — I'm here to help you understand how Bitcoin *works* and *why* it exists, not to tell you what to do with your money. Whether to buy, sell, or hold is a decision worth your own research (or a real financial advisor), not a chat with a study app. 💸",
+    "altcoin_question": "I'm laser-focused on Bitcoin, bestie — it's the one I really know inside and out, and honestly the one with the story worth understanding deeply. I can't speak to other coins with the same confidence, so I'll leave that one alone. 🧡",
+    "quiz_question_detected": "Ooh, is this one from the quiz? I won't just hand you the answer, but let's break down what it's actually asking — that way you'll be able to nail it yourself. Ask me about the concept it's testing and I'll walk you through it!"
+  }
+}

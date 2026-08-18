@@ -89,6 +89,11 @@ flutter:
   assets:
     - assets/images/
     - content/quiz/
+    # Only this one file from content/belle/ — system_prompt.md and
+    # knowledge_base.md are deliberately NOT bundled (see the README's
+    # Belle-content note); this JSON is the one file the app actually
+    # reads on-device, for BelleResponseMatcher's offline keyword matching.
+    - content/belle/belle_scripted_responses.json
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
