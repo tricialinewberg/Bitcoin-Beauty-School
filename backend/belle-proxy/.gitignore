@@ -1,0 +1,11 @@
+node_modules/
+.wrangler/
+dist/
+
+# Real secrets — only .dev.vars.example (a template with no real key) is
+# ever meant to be committed.
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env
+.env.*

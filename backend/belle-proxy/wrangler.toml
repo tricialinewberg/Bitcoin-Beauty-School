@@ -1,0 +1,30 @@
+name = "belle-proxy"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+# Bundle content/belle/*.md as plain text at build time, so the Worker's
+# system prompt is always the exact same file the app's README documents —
+# no separate copy to keep in sync. See src/content.ts.
+[[rules]]
+type = "Text"
+globs = ["**/*.md"]
+fallthrough = true
+
+# Non-secret config. Anthropic's own docs list Haiku as the cost/latency
+# pick for high-volume, conversational use — appropriate for a hobby-scale
+# chat companion. Bump ANTHROPIC_MODEL here (no code change needed) if
+# Belle's answers ever need more depth than Haiku reliably gives.
+[vars]
+ANTHROPIC_MODEL = "claude-haiku-4-5-20251001"
+MAX_OUTPUT_TOKENS = 700
+PER_PUBKEY_LIMIT = 30
+PER_PUBKEY_WINDOW_SECONDS = 3600
+PER_IP_LIMIT = 60
+PER_IP_WINDOW_SECONDS = 3600
+GLOBAL_DAILY_LIMIT = 2000
+
+# Created via `npx wrangler kv namespace create RATE_LIMIT_KV` — see
+# README.md. Replace the id below with the one that command prints.
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"

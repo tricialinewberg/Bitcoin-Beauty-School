@@ -1,0 +1,4 @@
+# Copy this file to `.dev.vars` (gitignored) for local `npm run dev` testing.
+# Never commit the real key — see README.md's "Secrets" section for how the
+# deployed Worker gets its key instead (`wrangler secret put`, not this file).
+ANTHROPIC_API_KEY=sk-ant-your-real-key-here
