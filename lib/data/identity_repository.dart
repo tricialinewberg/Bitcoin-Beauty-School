@@ -35,6 +35,27 @@ const suggestedPhraseBank = [
 /// shared_preferences. Earlier versions of this app stored it in
 /// shared_preferences; [ensureIdentity] migrates any such install
 /// automatically the first time it runs (see [_migrateLegacyPhraseIfNeeded]).
+///
+/// **Why the phrase isn't also NIP-49-encrypted at rest.** NIP-49 defines
+/// a way to encrypt a Nostr private key with a password into a portable
+/// `ncryptsec1...` string. It was evaluated for wrapping the phrase here,
+/// as a defense-in-depth layer on top of secure storage, and deliberately
+/// not implemented. The reasoning: NIP-49 (and encryption generally)
+/// protects a secret by requiring a second, independent secret to unlock
+/// it. This app has no such second secret — the phrase itself is the only
+/// credential in the model, so "encrypting" it with anything derived from
+/// itself (or stored alongside it) adds no real barrier over what
+/// Keychain/Keystore already enforces; it would only be an extra
+/// decorative decode step for anyone who already has what secure storage
+/// protects. The one design that *would* introduce a genuine independent
+/// secret — a user-set app PIN/password gating the phrase, with its own
+/// setup and recovery flow — was considered and declined as out of scope
+/// (a real new feature surface, not a wrapper). Biometric gating (device
+/// Face/Touch ID in front of the existing secure-storage read) was also
+/// considered as a lighter alternative and declined for now as a UX
+/// direction, not a security one. If a future session is tempted to add
+/// NIP-49 here, re-derive whether an independent secret exists first —
+/// without one, it isn't protection.
 class IdentityRepository {
   IdentityRepository._();
 
