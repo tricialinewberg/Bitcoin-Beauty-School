@@ -9,6 +9,7 @@ import '../../widgets/app_card.dart';
 import '../../widgets/glow_progress_bar.dart';
 import '../../widgets/section_label.dart';
 import '../../widgets/streak_day_row.dart';
+import '../belle/belle_conversation_screen.dart';
 import '../belle/belle_screen.dart';
 import '../journey/journey_screen.dart';
 import '../menu/side_menu.dart';
@@ -92,7 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   _ContinueWithBelleCard(
                     progress: progress,
                     onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const BelleScreen()),
+                      MaterialPageRoute(
+                        builder: (_) => const BelleConversationScreen(),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
