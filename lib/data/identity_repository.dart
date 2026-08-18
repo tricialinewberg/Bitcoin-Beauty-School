@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:nostr/nostr.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,12 +24,21 @@ const suggestedPhraseBank = [
 /// keypairs. A phrase is either generated on first use or set via restore;
 /// either way the same phrase always re-derives the same keys, on any
 /// device.
+///
+/// The phrase is the account's private key material at rest — anyone who
+/// reads it has full account access, the same as reading a raw private
+/// key — so it lives in platform secure storage (Keychain on iOS,
+/// Keystore-backed on Android via [FlutterSecureStorage]), not
+/// shared_preferences. Earlier versions of this app stored it in
+/// shared_preferences; [ensureIdentity] migrates any such install
+/// automatically the first time it runs (see [_migrateLegacyPhraseIfNeeded]).
 class IdentityRepository {
   IdentityRepository._();
 
   static final instance = IdentityRepository._();
 
   static const _phraseKey = 'bbs_key_phrase';
+  static const _secureStorage = FlutterSecureStorage();
 
   String? _phrase;
   Keys? _keys;
@@ -53,8 +63,8 @@ class IdentityRepository {
   Future<String> ensureIdentity() async {
     if (_phrase != null) return _phrase!;
 
-    final prefs = await SharedPreferences.getInstance();
-    final stored = prefs.getString(_phraseKey);
+    final migrated = await _migrateLegacyPhraseIfNeeded();
+    final stored = migrated ?? await _secureStorage.read(key: _phraseKey);
 
     if (stored != null && stored.isNotEmpty) {
       _activate(stored);
@@ -63,9 +73,25 @@ class IdentityRepository {
 
     final generated =
         suggestedPhraseBank[Random().nextInt(suggestedPhraseBank.length)];
-    await prefs.setString(_phraseKey, generated);
+    await _secureStorage.write(key: _phraseKey, value: generated);
     _activate(generated);
     return generated;
+  }
+
+  /// One-time migration for installs from before secure storage was
+  /// introduced: if a phrase is sitting in shared_preferences (its old,
+  /// less-protected home), move it into secure storage and delete the old
+  /// copy so it isn't left behind in both places.
+  ///
+  /// Returns the migrated phrase, or null if there was nothing to migrate.
+  Future<String?> _migrateLegacyPhraseIfNeeded() async {
+    final prefs = await SharedPreferences.getInstance();
+    final legacy = prefs.getString(_phraseKey);
+    if (legacy == null || legacy.isEmpty) return null;
+
+    await _secureStorage.write(key: _phraseKey, value: legacy);
+    await prefs.remove(_phraseKey);
+    return legacy;
   }
 
   /// Sets [phrase] as the device's active identity, overwriting whatever
@@ -73,8 +99,7 @@ class IdentityRepository {
   /// Callers are responsible for clearing/refreshing any data cached
   /// under the previous identity (see `ProgressRepository.clearLocalCache`).
   Future<void> restoreFromPhrase(String phrase) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_phraseKey, phrase);
+    await _secureStorage.write(key: _phraseKey, value: phrase);
     _activate(phrase);
   }
 
