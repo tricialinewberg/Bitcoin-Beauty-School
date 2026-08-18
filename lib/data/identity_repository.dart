@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -6,6 +7,8 @@ import 'package:nostr/nostr.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/nostr_keys.dart';
+import '../services/nostr_relay_client.dart';
+import 'relay_list_repository.dart';
 
 /// A small bank of beauty-themed phrases suggested to brand-new users on
 /// first launch. The phrase itself has no fixed-wordlist requirement (see
@@ -75,6 +78,18 @@ class IdentityRepository {
         suggestedPhraseBank[Random().nextInt(suggestedPhraseBank.length)];
     await _secureStorage.write(key: _phraseKey, value: generated);
     _activate(generated);
+
+    // Brand-new identity, nothing to discover yet — just announce the
+    // default relay set (NIP-65) under this pubkey so a future restore
+    // of this same phrase can find it. Best-effort, doesn't block
+    // startup on the network.
+    unawaited(
+      RelayListRepository.instance.publishRelayList(
+        _keys!,
+        NostrRelayClient.defaultRelayUrls,
+      ),
+    );
+
     return generated;
   }
 
@@ -98,9 +113,32 @@ class IdentityRepository {
   /// was there before (used by the "restore from another phrase" flow).
   /// Callers are responsible for clearing/refreshing any data cached
   /// under the previous identity (see `ProgressRepository.clearLocalCache`).
+  ///
+  /// Also resolves which relays to use for this identity (NIP-65): resets
+  /// to the default set, then looks up a kind:10002 relay list for this
+  /// identity's pubkey. If one exists (e.g. this phrase was used on
+  /// another device that already published one), switches to it. If not
+  /// — a genuinely new phrase, or an identity created before NIP-65
+  /// support existed — keeps the default set and publishes one now, so a
+  /// future restore of this same identity finds it.
   Future<void> restoreFromPhrase(String phrase) async {
     await _secureStorage.write(key: _phraseKey, value: phrase);
     _activate(phrase);
+
+    NostrRelayClient.resetToDefaultRelays();
+    final discovered = await RelayListRepository.instance.fetchRelayList(
+      _keys!.public,
+    );
+    if (discovered != null) {
+      NostrRelayClient.useRelays(discovered);
+    } else {
+      unawaited(
+        RelayListRepository.instance.publishRelayList(
+          _keys!,
+          NostrRelayClient.defaultRelayUrls,
+        ),
+      );
+    }
   }
 
   void _activate(String phrase) {

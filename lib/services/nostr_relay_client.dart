@@ -28,11 +28,43 @@ abstract final class NostrRelayClient {
   /// Publishing fans out to all three; fetching merges results from all
   /// three (deduplicated by event id). No relay is authoritative — this
   /// is redundancy, not a single point of failure.
-  static const relayUrls = [
+  ///
+  /// This is the default/fallback set, always available via
+  /// [defaultRelayUrls]. It's also the starting value of the *active*
+  /// set ([relayUrls]) that [publish]/[fetch] actually use — see
+  /// [useRelays] for how a NIP-65 relay list discovered for the active
+  /// identity can supplement it.
+  static const defaultRelayUrls = [
     'wss://relay.damus.io',
     'wss://nos.lol',
     'wss://relay.nostr.band',
   ];
+
+  static List<String> _activeRelayUrls = List.of(defaultRelayUrls);
+
+  /// The relay set [publish] and [fetch] currently use. Starts as
+  /// [defaultRelayUrls]; changes when [useRelays] or
+  /// [resetToDefaultRelays] is called.
+  static List<String> get relayUrls => List.unmodifiable(_activeRelayUrls);
+
+  /// Switches the active relay set to [urls] — used once a NIP-65
+  /// (kind 10002) relay list has been discovered for the active
+  /// identity. A call with an empty list is ignored, so a malformed or
+  /// empty relay list event can never leave the app with nowhere to
+  /// connect.
+  static void useRelays(List<String> urls) {
+    if (urls.isEmpty) return;
+    _activeRelayUrls = List.of(urls);
+  }
+
+  /// Resets the active relay set back to [defaultRelayUrls]. Called when
+  /// switching identities (restore), before that identity's own NIP-65
+  /// relay list (if any) is looked up and applied — so the lookup itself
+  /// always starts from a known-good set rather than whatever the
+  /// previous identity happened to leave active.
+  static void resetToDefaultRelays() {
+    _activeRelayUrls = List.of(defaultRelayUrls);
+  }
 
   /// Publishes [event] to every configured relay in parallel.
   ///
