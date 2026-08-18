@@ -39,6 +39,14 @@ Belle's chat history is stored using NIP-17 (Nostr's private direct message stan
 
 The fix: Belle's keypair is derived from the *same* key phrase as the user's own identity, just with a different derivation tag — the same one-way process, just two different labels going in. Nothing is shared across installs and nothing is hardcoded. The honest way to describe what this buys you: it's not a conversation with an independent Belle identity, it's the user's own client having a structured conversation with itself, wrapped in NIP-17's envelope for its metadata-privacy properties. Anyone who has the key phrase can derive both keys and read both sides — which is exactly the same person in every real scenario, since having the phrase already means having the whole account.
 
+### A design note: why Belle's content lives in the repo but not in the app
+
+[`content/belle/`](./content/belle) holds Belle's persona (`system_prompt.md`) and factual grounding (`knowledge_base.md`) — the instruction text and reference material an LLM needs to answer as Belle. Unlike [`content/quiz/`](./content/quiz), these files are **not** registered as Flutter assets and never ship inside the app binary.
+
+The reason is what they're for: Belle's actual replies come from a real LLM API call, made by a backend proxy (a Cloud Function, not yet built) that holds the API key server-side. That proxy is what includes this content as system/context for each request — the app itself never talks to the LLM directly and never needs this content on-device. Bundling it into the APK would serve no purpose (the client doesn't run the model) while needlessly exposing Belle's full prompt engineering and knowledge base to anyone who unpacks the app. Keeping it in the repo, out of the asset bundle, is what makes that split possible later without restructuring anything now.
+
+**Heads-up for later:** `knowledge_base.md` is already ~40KB (quiz-tier content plus all 6 planned "technical deep dive" passes). That's manageable as a single system-context block today, but it's worth watching — if it keeps growing, a future backend pass may need to send only the relevant section per conversation (e.g. by topic or quiz tier) rather than the whole file on every request, to stay comfortably inside the LLM's context window and keep prompt costs down. Not a problem yet, just flagging it before it becomes one.
+
 
 ## Design
 
